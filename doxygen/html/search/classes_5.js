@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['registry_47',['Registry',['../classRegistry.html',1,'']]]
+  ['registry_49',['Registry',['../classRegistry.html',1,'']]]
 ];

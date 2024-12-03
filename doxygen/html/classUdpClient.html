@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>R-Type: Velocity Class Reference</title>
+<title>R-Type: UdpClient Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,30 +63,27 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="classVelocity-members.html">List of all members</a>  </div>
+<a href="classUdpClient-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Velocity Class Reference</div>  </div>
+<div class="title">UdpClient Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a393cdc019f03ea9fe6e9a21b159e3e2f"><td class="memItemLeft" align="right" valign="top"><a id="a393cdc019f03ea9fe6e9a21b159e3e2f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Velocity</b> (int x=0, int y=0)</td></tr>
-<tr class="separator:a393cdc019f03ea9fe6e9a21b159e3e2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a187e49dd195f35d9566d87e75c2bd43d"><td class="memItemLeft" align="right" valign="top"><a id="a187e49dd195f35d9566d87e75c2bd43d"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>x</b></td></tr>
-<tr class="separator:a187e49dd195f35d9566d87e75c2bd43d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf369bfba58dde57499b342b5e7b77f8"><td class="memItemLeft" align="right" valign="top"><a id="adf369bfba58dde57499b342b5e7b77f8"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>y</b></td></tr>
-<tr class="separator:adf369bfba58dde57499b342b5e7b77f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ae95c15c23b84df06551d5a53c0d30b"><td class="memItemLeft" align="right" valign="top"><a id="a9ae95c15c23b84df06551d5a53c0d30b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>UdpClient</b> (const std::string &amp;ip, int port)</td></tr>
+<tr class="separator:a9ae95c15c23b84df06551d5a53c0d30b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d57aa27b4cfa7be1416baed9836e55c"><td class="memItemLeft" align="right" valign="top"><a id="a6d57aa27b4cfa7be1416baed9836e55c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>send_data</b> (std::vector&lt; uint8_t &gt; &amp;data)</td></tr>
+<tr class="separator:a6d57aa27b4cfa7be1416baed9836e55c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b2f7e1a582e9ea6e9a262108ed97c88"><td class="memItemLeft" align="right" valign="top"><a id="a7b2f7e1a582e9ea6e9a262108ed97c88"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>receive_data</b> (std::vector&lt; uint8_t &gt; &amp;buffer)</td></tr>
+<tr class="separator:a7b2f7e1a582e9ea6e9a262108ed97c88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/graphical/main.cpp</li>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/graphical/<a class="el" href="UdpClient_8hpp_source.html">UdpClient.hpp</a></li>
+<li>src/graphical/UdpClient.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
