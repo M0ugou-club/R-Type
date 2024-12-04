@@ -1,36 +1,48 @@
-#include "Registry.hpp"
+/*
+** EPITECH PROJECT, 2024
+** R-Type
+** File description:
+** main
+*/
+
+#include "../ecs/Registry.hpp"
 #include "TcpClient.hpp"
 #include "UdpClient.hpp"
-#include "Control.hpp"
-#include "Draw.hpp"
-#include "Health.hpp"
-#include "Position.hpp"
-#include "Velocity.hpp"
+#include "Components/Control.hpp"
+#include "Components/Draw.hpp"
+#include "Components/Health.hpp"
+#include "Components/Position.hpp"
+#include "Components/Velocity.hpp"
 #include <SDL3/SDL.h>
 #include <iostream>
 #include <vector>
 
-
-void position_system(Registry &registry, float deltaTime) {
+void position_system(Registry &registry, float deltaTime)
+{
   auto &positions = registry.get_components<Position>();
   auto &velocities = registry.get_components<Velocity>();
 
-  for (std::size_t i = 0; i < positions.size(); ++i) {
-    if (positions[i] && velocities[i]) {
+  for (std::size_t i = 0; i < positions.size(); ++i)
+  {
+    if (positions[i] && velocities[i])
+    {
       positions[i]->x += velocities[i]->x * deltaTime;
       positions[i]->y += velocities[i]->y * deltaTime;
     }
   }
 }
 
-void control_system(Registry &registry) {
+void control_system(Registry &registry)
+{
   const bool *keyState = SDL_GetKeyboardState(NULL);
 
   auto &controllables = registry.get_components<Control>();
   auto &velocities = registry.get_components<Velocity>();
 
-  for (std::size_t i = 0; i < controllables.size(); ++i) {
-    if (controllables[i] && velocities[i]) {
+  for (std::size_t i = 0; i < controllables.size(); ++i)
+  {
+    if (controllables[i] && velocities[i])
+    {
       velocities[i]->x = 0;
       velocities[i]->y = 0;
 
@@ -48,12 +60,15 @@ void control_system(Registry &registry) {
   }
 }
 
-void draw_system(Registry &registry, SDL_Renderer *renderer) {
+void draw_system(Registry &registry, SDL_Renderer *renderer)
+{
   auto &positions = registry.get_components<Position>();
   auto &drawables = registry.get_components<Draw>();
 
-  for (std::size_t i = 0; i < positions.size(); ++i) {
-    if (positions[i] && drawables[i]) {
+  for (std::size_t i = 0; i < positions.size(); ++i)
+  {
+    if (positions[i] && drawables[i])
+    {
       SDL_FRect rect = {static_cast<float>(positions[i]->x),
                         static_cast<float>(positions[i]->y),
                         static_cast<float>(drawables[i]->rect.w),
@@ -66,7 +81,8 @@ void draw_system(Registry &registry, SDL_Renderer *renderer) {
   }
 }
 
-std::vector<uint8_t> serialize_connect(const std::string &player_name) {
+std::vector<uint8_t> serialize_connect(const std::string &player_name)
+{
   std::vector<uint8_t> packet;
   packet.push_back(0x01);
   uint16_t payload_size = htons(player_name.size());
@@ -77,7 +93,47 @@ std::vector<uint8_t> serialize_connect(const std::string &player_name) {
   return packet;
 }
 
-int main() {
+void bullet_system(Registry &registry, float deltaTime)
+{
+    auto &positions = registry.get_components<Position>();
+    auto &velocities = registry.get_components<Velocity>();
+
+    for (std::size_t i = 0; i < positions.size(); ++i)
+    {
+        if (positions[i] && velocities[i])
+        {
+            positions[i]->x += velocities[i]->x * deltaTime;
+            positions[i]->y += velocities[i]->y * deltaTime;
+        }
+    }
+}
+
+void handle_bullet_shooting(Registry &registry, const Position &player_position)
+{
+    const bool *keyState = SDL_GetKeyboardState(NULL);
+
+    static bool spaceWasPressed = false;
+
+    if (keyState[SDL_SCANCODE_SPACE])
+    {
+        if (!spaceWasPressed)
+        {
+            auto bullet = registry.spawn_entity();
+            registry.add_component<Position>(bullet, Position(player_position.x + 50, player_position.y + 20));
+            registry.add_component<Velocity>(bullet, Velocity(200, 0));
+            registry.add_component<Draw>(bullet, Draw({255, 255, 255, 255}, {0, 0, 10, 10}));
+
+            spaceWasPressed = true;
+        }
+    }
+    else
+    {
+        spaceWasPressed = false;
+    }
+}
+
+int main()
+{
 
   //   try {
   //     TcpClient tcp("127.0.0.1", 12345);
@@ -102,76 +158,96 @@ int main() {
   //     std::cerr << "Error: " << e.what() << std::endl;
   //     return 1;
   //   }
-  std::cout << "SDL Version: " << SDL_GetVersion() << std::endl;
-  if (SDL_Init(SDL_INIT_VIDEO) == 0) {
-    std::cerr << "SDL Initialization failed: " << SDL_GetError() << std::endl;
-    return 1;
-  }
-
-  SDL_Window *window = SDL_CreateWindow("ECS Draw System", 800, 600, 0);
-  if (!window) {
-    std::cerr << "Window creation failed: " << SDL_GetError() << std::endl;
-    SDL_Quit();
-    return 1;
-  }
-
-  SDL_Renderer *renderer = SDL_CreateRenderer(window, nullptr);
-  if (!renderer) {
-    std::cerr << "Renderer creation failed: " << SDL_GetError() << std::endl;
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-    return 1;
-  }
-
-  Registry registry;
-
-  registry.register_component<Position>();
-  registry.register_component<Velocity>();
-  registry.register_component<Draw>();
-  registry.register_component<Control>();
-  registry.register_component<Health>();
-
-  auto entity = registry.spawn_entity();
-  registry.add_component<Position>(entity, Position(100, 150));
-  registry.add_component<Velocity>(entity, Velocity());
-  registry.add_component<Health>(entity, Health());
-  registry.add_component<Draw>(
-      entity, Draw({0, 255, 0, 255}, {100, 150, 50, 50}));
-  registry.add_component<Control>(entity, Control());
-
-  bool running = true;
-  SDL_Event event;
-  Uint64 now = SDL_GetPerformanceCounter();
-  Uint64 last = 0;
-  float deltaTime = 0;
-
-  while (running) {
-    last = now;
-    now = SDL_GetPerformanceCounter();
-    deltaTime = (float)((now - last) / (float)SDL_GetPerformanceFrequency());
-
-    while (SDL_PollEvent(&event)) {
-      if (event.type == SDL_EVENT_QUIT) {
-        running = false;
-      }
+    std::cout << "SDL Version: " << SDL_GetVersion() << std::endl;
+    if (SDL_Init(SDL_INIT_VIDEO) == 0)
+    {
+        std::cerr << "SDL Initialization failed: " << SDL_GetError() << std::endl;
+        return 1;
     }
 
-    control_system(registry);
-    position_system(registry, deltaTime);
+    SDL_Window *window = SDL_CreateWindow("ECS Draw System", 800, 600, 0);
+    if (!window)
+    {
+        std::cerr << "Window creation failed: " << SDL_GetError() << std::endl;
+        SDL_Quit();
+        return 1;
+    }
 
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    SDL_RenderClear(renderer);
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, nullptr);
+    if (!renderer)
+    {
+        std::cerr << "Renderer creation failed: " << SDL_GetError() << std::endl;
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
 
-    draw_system(registry, renderer);
+    Registry registry;
 
-    SDL_RenderPresent(renderer);
-  }
+    registry.register_component<Position>();
+    registry.register_component<Velocity>();
+    registry.register_component<Draw>();
+    registry.register_component<Control>();
+    registry.register_component<Health>();
 
-  SDL_DestroyRenderer(renderer);
-  SDL_DestroyWindow(window);
-  SDL_Quit();
+    auto player = registry.spawn_entity();
+    registry.add_component<Position>(player, Position(100, 150));
+    registry.add_component<Velocity>(player, Velocity());
+    registry.add_component<Health>(player, Health());
+    registry.add_component<Draw>(
+        player, Draw({0, 255, 0, 255}, {100, 150, 50, 50}));
+    registry.add_component<Control>(player, Control());
 
-  return 0;
+    auto ennemy = registry.spawn_entity();
+    registry.add_component<Position>(ennemy, Position(600, 300));
+    registry.add_component<Velocity>(ennemy, Velocity());
+    registry.add_component<Health>(ennemy, Health());
+    registry.add_component<Draw>(
+        ennemy, Draw({255, 0, 0, 255}, {500, 150, 50, 50}));
+
+    bool running = true;
+    SDL_Event event;
+    Uint64 now = SDL_GetPerformanceCounter();
+    Uint64 last = 0;
+    float deltaTime = 0;
+
+    while (running)
+    {
+        last = now;
+        now = SDL_GetPerformanceCounter();
+        deltaTime = (float)((now - last) / (float)SDL_GetPerformanceFrequency());
+
+        while (SDL_PollEvent(&event))
+        {
+            if (event.type == SDL_EVENT_QUIT)
+            {
+                running = false;
+            }
+        }
+
+        auto &player_positions = registry.get_components<Position>();
+
+        const Position &player_position = player_positions[player].value();
+        handle_bullet_shooting(registry, player_position);
+
+
+        control_system(registry);
+        position_system(registry, deltaTime);
+        bullet_system(registry, deltaTime);
+
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+
+        draw_system(registry, renderer);
+
+        SDL_RenderPresent(renderer);
+    }
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
 }
 
 // int main() {

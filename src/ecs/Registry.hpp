@@ -37,9 +37,9 @@
  * creation, destruction, and component lifecycle operations.
  */
 class Registry {
-  using entity_t = Entities;
 
 public:
+  using entity_t = Entities;
   /** @name Component Registration and Access */
   ///@{
   /**
@@ -238,6 +238,10 @@ public:
   };
   ///@}
 
+  /**
+   * @brief List of all active entities.
+   */
+  std::vector<Entities> _entities;
 private:
   /**
    * @brief Map of component types to their corresponding `SparseArray`.
@@ -253,10 +257,6 @@ private:
   std::unordered_map<std::type_index, std::function<void(entity_t const &e)>>
       _removal_functions;
 
-  /**
-   * @brief List of all active entities.
-   */
-  std::vector<Entities> _entities;
 
   /**
    * @brief List of available entity IDs for reuse.
