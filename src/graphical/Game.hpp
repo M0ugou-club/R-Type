@@ -1,60 +1,78 @@
 /*
 ** EPITECH PROJECT, 2024
-** Rtype
+** R-Type
 ** File description:
 ** Game
 */
 
-#ifndef GAME_HPP
-#define GAME_HPP
+#pragma once
 
-#include "Registry.hpp"
-#include <SDL3/SDL.h>
+#include "Components/Control.hpp"
+#include "Components/Draw.hpp"
+#include "Components/Health.hpp"
+#include "Components/Position.hpp"
+#include "Components/Velocity.hpp"
+#include "../ecs/SparseArray.hpp"
+#include "../ecs/EntitiesGestion.hpp"
 
-class Health {
-public:
-  int hp;
-  Health(int hp = 100) : hp(hp) {}
-};
-
-class Position {
-public:
-  float x, y;
-  Position(int x = 0, int y = 0) : x(x), y(y) {}
-};
-
-class Velocity {
-public:
-  float x, y;
-  Velocity(int x = 0, int y = 0) : x(x), y(y) {}
-};
-
-class Drawable {
-public:
-  SDL_Rect rect;
-  SDL_Color color;
-
-  Drawable(SDL_Color col, SDL_Rect size) : rect(size), color(col) {}
-};
-
-class Controllable {
-public:
-  bool moveUp = false;
-  bool moveDown = false;
-  bool moveLeft = false;
-  bool moveRight = false;
-
-  void reset() { moveUp = moveDown = moveLeft = moveRight = false; }
-};
-
-void createPlayer(Registry &registry, float positionX, float positionY,
-                  SDL_Color color, SDL_Rect size) {
-  auto entity = registry.spawn_entity();
-  registry.add_component<Position>(entity, Position(positionX, positionY));
-  registry.add_component<Velocity>(entity, Velocity());
-  registry.add_component<Health>(entity, Health());
-  registry.add_component<Drawable>(entity, Drawable(color, size));
-  registry.add_component<Controllable>(entity, Controllable());
+void enemy_system(Registry &registry, Entities &enemy) {
+    if (registry.get_components<Position>()[enemy]->y < 0) {
+        registry.get_components<Velocity>()[enemy]->y = 100;
+    } else if (registry.get_components<Position>()[enemy]->y > 600) {
+        registry.get_components<Velocity>()[enemy]->y = -100;
+    }
 }
 
-#endif // GAME_HPP
+void collision_system(Registry &registry) {
+    auto &positions = registry.get_components<Position>();
+    auto &drawables = registry.get_components<Draw>();
+
+    for (std::size_t i = 0; i < positions.size(); ++i) {
+        if (!positions[i] || !drawables[i])
+            continue;
+        Draw *enemyDraw = drawables[i].operator->();
+        if (enemyDraw->color.r == 255 && enemyDraw->color.g == 0 && enemyDraw->color.b == 0) {
+            float ex = positions[i]->x;
+            float ey = positions[i]->y;
+            float ew = (float)enemyDraw->rect.w;
+            float eh = (float)enemyDraw->rect.h;
+
+            for (std::size_t j = 0; j < positions.size(); ++j) {
+                if (!positions[j] || !drawables[j])
+                    continue;
+                Draw *projDraw = drawables[j].operator->();
+                if (projDraw->color.r == 0 && projDraw->color.g == 0 && projDraw->color.b == 255) {
+                    float px = positions[j]->x;
+                    float py = positions[j]->y;
+                    float pw = (float)projDraw->rect.w;
+                    float ph = (float)projDraw->rect.h;
+
+                    bool collision = (px < ex + ew && px + pw > ex && py < ey + eh && py + ph > ey);
+                    if (collision) {
+                        std::cout << "Touché" << std::endl;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void handle_shoot(Registry &registry, Entities &entity) {
+    auto &positions = registry.get_components<Position>();
+    auto &drawables = registry.get_components<Draw>();
+
+    auto projectile = registry.spawn_entity();
+    registry.add_component<Position>(projectile, Position(positions[entity]->x + 50, positions[entity]->y + 20));
+    registry.add_component<Velocity>(projectile, Velocity(200, 0));
+    registry.add_component<Draw>(projectile, Draw({0, 0, 255, 255}, {10, 10, 10, 10}));
+
+}
+
+void get_space_event(Registry &registry, Entities &entity) {
+    const bool *keyState = SDL_GetKeyboardState(NULL);
+    
+    if (keyState[SDL_SCANCODE_SPACE]) {
+        handle_shoot(registry, entity);
+    }
+}
+
