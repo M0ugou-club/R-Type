@@ -113,6 +113,7 @@ int main() {
   Uint64 now = SDL_GetPerformanceCounter();
   Uint64 last = 0;
   float deltaTime = 0;
+  float shootCooldown = 0.0f;
 
   while (running) {
     last = now;
@@ -127,7 +128,7 @@ int main() {
 
     control_system(registry);
     position_system(registry, deltaTime);
-    get_space_event(registry, player);
+    get_space_event(registry, player, shootCooldown, deltaTime);
     collision_system(registry, enemy, player);
     enemy_system(registry, enemy);
 

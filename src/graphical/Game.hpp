@@ -55,11 +55,12 @@ void handle_shoot(Registry &registry, Entities &entity) {
 
 }
 
-void get_space_event(Registry &registry, Entities &entity) {
+void get_space_event(Registry &registry, Entities &entity, float &shootCooldown, float deltaTime) {
     const bool *keyState = SDL_GetKeyboardState(NULL);
+    shootCooldown -= deltaTime;
     
-    if (keyState[SDL_SCANCODE_SPACE]) {
+    if (keyState[SDL_SCANCODE_SPACE] && shootCooldown <= 0.0f) {
         handle_shoot(registry, entity);
+        shootCooldown = 0.5f;
     }
 }
-
