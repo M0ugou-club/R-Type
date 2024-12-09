@@ -28,6 +28,7 @@ void collision_system(Registry &registry, Entities &enemy, Entities &player) {
     auto &positions = registry.get_components<Position>();
     auto &drawables = registry.get_components<Draw>();
     auto &controls = registry.get_components<Control>();
+    auto &healths = registry.get_components<Health>();
 
     for (std::size_t i = 0; i < positions.size(); ++i) {
         if (positions[i] && drawables[i]) {
@@ -38,7 +39,10 @@ void collision_system(Registry &registry, Entities &enemy, Entities &player) {
                 positions[i]->x + drawables[i]->rect.w > positions[enemy]->x &&
                 positions[i]->y < positions[enemy]->y + drawables[enemy]->rect.h &&
                 positions[i]->y + drawables[i]->rect.h > positions[enemy]->y) {
-                std::cout << "Touché" << std::endl;
+                healths[enemy]->hp -= 10;
+                std::cout << "Touché, il reste " << healths[enemy]->hp << " hp" << std::endl;
+                //registry.kill_entity(Entities (i));
+                return;
             }
         }
     }
