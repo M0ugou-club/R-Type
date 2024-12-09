@@ -55,7 +55,7 @@ void handle_shoot(Registry &registry, Entities &entity) {
     auto projectile = registry.spawn_entity();
     registry.add_component<Position>(projectile, Position(positions[entity]->x + 50, positions[entity]->y + 20));
     registry.add_component<Velocity>(projectile, Velocity(400, 0));
-    registry.add_component<Draw>(projectile, Draw({0, 0, 255, 255}, {10, 10, 10, 10}));
+    registry.add_component<Draw>(projectile, Draw({255, 255, 255, 255}, {10, 10, 10, 10}));
 
 }
 
