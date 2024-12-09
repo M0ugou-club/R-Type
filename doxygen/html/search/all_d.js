@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['tcpclient_38',['TcpClient',['../classTcpClient.html',1,'']]]
+  ['tcp_41',['Tcp',['../classTcp.html',1,'']]],
+  ['tcpclient_42',['TcpClient',['../classTcpClient.html',1,'']]]
 ];
