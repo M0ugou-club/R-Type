@@ -24,14 +24,14 @@ void enemy_system(Registry &registry, Entities &enemy) {
     }
 }
 
-void collision_system(Registry &registry, Entities &enemy) {
+void collision_system(Registry &registry, Entities &enemy, Entities &player) {
     auto &positions = registry.get_components<Position>();
     auto &drawables = registry.get_components<Draw>();
     auto &controls = registry.get_components<Control>();
 
     for (std::size_t i = 0; i < positions.size(); ++i) {
         if (positions[i] && drawables[i]) {
-            if (i == enemy) {
+            if (i == enemy || i == player) {
                 continue;
             }
             if (positions[i]->x < positions[enemy]->x + drawables[enemy]->rect.w &&

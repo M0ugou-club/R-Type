@@ -128,7 +128,7 @@ int main() {
     control_system(registry);
     position_system(registry, deltaTime);
     get_space_event(registry, player);
-    collision_system(registry, enemy);
+    collision_system(registry, enemy, player);
     enemy_system(registry, enemy);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
