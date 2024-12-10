@@ -41,7 +41,7 @@ void collision_system(Registry &registry, Entities &enemy, Entities &player) {
                 positions[i]->y + drawables[i]->rect.h > positions[enemy]->y) {
                 healths[enemy]->hp -= 10;
                 std::cout << "Touché, il reste " << healths[enemy]->hp << " hp" << std::endl;
-                //registry.kill_entity(Entities (i));
+                registry.kill_entity(enemy);
                 return;
             }
         }

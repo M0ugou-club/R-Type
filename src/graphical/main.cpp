@@ -107,7 +107,6 @@ int main() {
   registry.add_component<Draw>(enemy, Draw({255, 0, 0, 255}, {100, 150, 50, 50}));
   registry.add_component<Health>(enemy, Health(50));
 
-
   bool running = true;
   SDL_Event event;
   Uint64 now = SDL_GetPerformanceCounter();
