@@ -14,6 +14,8 @@
 #include "Components/Velocity.hpp"
 #include "../ecs/SparseArray.hpp"
 #include "../ecs/EntitiesGestion.hpp"
+#include <SDL3_image/SDL_image.h>
+#include <SDL3/SDL_render.h>
 
 
 void enemy_system(Registry &registry, Entities &enemy) {
@@ -22,6 +24,10 @@ void enemy_system(Registry &registry, Entities &enemy) {
     } else if (registry.get_components<Position>()[enemy]->y > 600) {
         registry.get_components<Velocity>()[enemy]->y = -100;
     }
+
+    if (registry.get_components<Health>()[enemy]->hp <= 0) {
+        registry.kill_entity(enemy);
+    }
 }
 
 void collision_system(Registry &registry, Entities &enemy, Entities &player) {
@@ -29,6 +35,7 @@ void collision_system(Registry &registry, Entities &enemy, Entities &player) {
     auto &drawables = registry.get_components<Draw>();
     auto &controls = registry.get_components<Control>();
     auto &healths = registry.get_components<Health>();
+
 
     for (std::size_t i = 0; i < positions.size(); ++i) {
         if (positions[i] && drawables[i]) {
@@ -41,30 +48,32 @@ void collision_system(Registry &registry, Entities &enemy, Entities &player) {
                 positions[i]->y + drawables[i]->rect.h > positions[enemy]->y) {
                 healths[enemy]->hp -= 10;
                 std::cout << "Touché, il reste " << healths[enemy]->hp << " hp" << std::endl;
-                registry.kill_entity(enemy);
+                registry.kill_entity(Entities(i));
                 return;
             }
         }
     }
 }
 
-void handle_shoot(Registry &registry, Entities &entity) {
+void handle_shoot(Registry &registry, Entities &entity, SDL_Renderer *renderer) {
     auto &positions = registry.get_components<Position>();
     auto &drawables = registry.get_components<Draw>();
-
     auto projectile = registry.spawn_entity();
+
+    SDL_Texture *bulletTexture = IMG_LoadTexture(renderer, "../src/graphical/assets/Cheese.png");
+
     registry.add_component<Position>(projectile, Position(positions[entity]->x + 50, positions[entity]->y + 20));
-    registry.add_component<Velocity>(projectile, Velocity(400, 0));
-    registry.add_component<Draw>(projectile, Draw({255, 255, 255, 255}, {10, 10, 10, 10}));
+    registry.add_component<Velocity>(projectile, Velocity(500, 0));
+    registry.add_component<Draw>(projectile, Draw({255, 255, 255, 255}, {40, 40, 40, 40}, bulletTexture));
 
 }
 
-void get_space_event(Registry &registry, Entities &entity, float &shootCooldown, float deltaTime) {
+void get_space_event(Registry &registry, Entities &entity, float &shootCooldown, float deltaTime, SDL_Renderer *renderer) {
     const bool *keyState = SDL_GetKeyboardState(NULL);
     shootCooldown -= deltaTime;
     
     if (keyState[SDL_SCANCODE_SPACE] && shootCooldown <= 0.0f) {
-        handle_shoot(registry, entity);
-        shootCooldown = 0.5f;
+        handle_shoot(registry, entity, renderer);
+        shootCooldown = 0.2f;
     }
 }
