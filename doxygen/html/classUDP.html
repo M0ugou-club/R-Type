@@ -74,8 +74,9 @@ Inheritance diagram for UDP:</div>
  <div class="center">
   <img src="classUDP.png" usemap="#UDP_map" alt=""/>
   <map id="UDP_map" name="UDP_map">
-<area href="classAProtocol.html" alt="AProtocol" shape="rect" coords="0,56,68,80"/>
+<area href="classAProtocol.html" alt="AProtocol" shape="rect" coords="39,56,107,80"/>
 <area href="classIProtocol.html" alt="IProtocol" shape="rect" coords="0,0,68,24"/>
+<area href="classIProtocol.html" alt="IProtocol" shape="rect" coords="78,0,146,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -90,52 +91,77 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>initializeSocket</b> 
 <tr class="memitem:ac42d6ae4edb7197db6279731a7edf798"><td class="memItemLeft" align="right" valign="top"><a id="ac42d6ae4edb7197db6279731a7edf798"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>bindSocket</b> () override</td></tr>
 <tr class="separator:ac42d6ae4edb7197db6279731a7edf798"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a957317d2365583322f13bf23383ce05d"><td class="memItemLeft" align="right" valign="top"><a id="a957317d2365583322f13bf23383ce05d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>sendData</b> (const std::string &amp;data, const std::string &amp;destIp, std::size_t destPort) override</td></tr>
-<tr class="separator:a957317d2365583322f13bf23383ce05d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b42dcfe55082d0d79b0cc0f56f24f5c"><td class="memItemLeft" align="right" valign="top"><a id="a4b42dcfe55082d0d79b0cc0f56f24f5c"></a>
-std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>receiveData</b> () override</td></tr>
-<tr class="separator:a4b42dcfe55082d0d79b0cc0f56f24f5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff91a4685a075f6bf40f69e39f0942b2"><td class="memItemLeft" align="right" valign="top"><a id="aff91a4685a075f6bf40f69e39f0942b2"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>sendData</b> (const std::string &amp;data, int id) override</td></tr>
+<tr class="separator:aff91a4685a075f6bf40f69e39f0942b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43013334dc626d01cb4a1cec33f556df"><td class="memItemLeft" align="right" valign="top"><a id="a43013334dc626d01cb4a1cec33f556df"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>closeSocket</b> () override</td></tr>
 <tr class="separator:a43013334dc626d01cb4a1cec33f556df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2aa0bf989fe86246f2d25a6a67b51d51"><td class="memItemLeft" align="right" valign="top"><a id="a2aa0bf989fe86246f2d25a6a67b51d51"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>listenSocket</b> (int backlog=5) override</td></tr>
 <tr class="separator:a2aa0bf989fe86246f2d25a6a67b51d51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55df04353f4511671aff8c707e51c88b"><td class="memItemLeft" align="right" valign="top"><a id="a55df04353f4511671aff8c707e51c88b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>acceptConnection</b> () override</td></tr>
-<tr class="separator:a55df04353f4511671aff8c707e51c88b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41345286d6fe05879746aaa7ae31a7bc"><td class="memItemLeft" align="right" valign="top"><a id="a41345286d6fe05879746aaa7ae31a7bc"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>deserialize_connect</b> (const std::vector&lt; uint8_t &gt; &amp;data)</td></tr>
-<tr class="separator:a41345286d6fe05879746aaa7ae31a7bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ebeea7e76946188ce70ecdc712828bf"><td class="memItemLeft" align="right" valign="top"><a id="a7ebeea7e76946188ce70ecdc712828bf"></a>
+std::vector&lt; uint8_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getBuffer</b> () override</td></tr>
+<tr class="separator:a7ebeea7e76946188ce70ecdc712828bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cb6f5b0ca1634e7e77b7804f1522ef3"><td class="memItemLeft" align="right" valign="top"><a id="a4cb6f5b0ca1634e7e77b7804f1522ef3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isClientAddressPresent</b> (const sockaddr_in &amp;clientAddr)</td></tr>
+<tr class="separator:a4cb6f5b0ca1634e7e77b7804f1522ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classAProtocol"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classAProtocol')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classAProtocol.html">AProtocol</a></td></tr>
+<tr class="memitem:ae5adc74fa1cf92291e9b789056c879d0 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="ae5adc74fa1cf92291e9b789056c879d0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AProtocol</b> (std::string ip=&quot;0.0.0.0&quot;, std::size_t port=4242)</td></tr>
+<tr class="separator:ae5adc74fa1cf92291e9b789056c879d0 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcfd2a2188883ab90f5118d37b922fc1 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="adcfd2a2188883ab90f5118d37b922fc1"></a>
+std::size_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getPort</b> ()</td></tr>
+<tr class="separator:adcfd2a2188883ab90f5118d37b922fc1 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86b9a2a7154d53f5d4a9cedceeac7432 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a86b9a2a7154d53f5d4a9cedceeac7432"></a>
+std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getIp</b> ()</td></tr>
+<tr class="separator:a86b9a2a7154d53f5d4a9cedceeac7432 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e0151bce583568881dbfe1fd5cb3730 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a2e0151bce583568881dbfe1fd5cb3730"></a>
+sockaddr_in &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getAddr</b> ()</td></tr>
+<tr class="separator:a2e0151bce583568881dbfe1fd5cb3730 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a97cca92364bd3100c00ca774e68f1b inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a7a97cca92364bd3100c00ca774e68f1b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getSocket</b> ()</td></tr>
+<tr class="separator:a7a97cca92364bd3100c00ca774e68f1b inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8acd1b1381147cefd58112d4399ea537 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a8acd1b1381147cefd58112d4399ea537"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> ()</td></tr>
+<tr class="separator:a8acd1b1381147cefd58112d4399ea537 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a27c649ed63ba28731950cb9edf2b3e inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a0a27c649ed63ba28731950cb9edf2b3e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>AProtocol</b> (std::size_t port=4242, std::string ip=&quot;0.0.0.0&quot;)</td></tr>
 <tr class="separator:a0a27c649ed63ba28731950cb9edf2b3e inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfdef9db1f67b2ea0e75dffd64462652 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="abfdef9db1f67b2ea0e75dffd64462652"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setPort</b> (std::size_t port)</td></tr>
 <tr class="separator:abfdef9db1f67b2ea0e75dffd64462652 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcfd2a2188883ab90f5118d37b922fc1 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="adcfd2a2188883ab90f5118d37b922fc1"></a>
+<tr class="memitem:a1799b1dfb2f2d8ee8909df09036e88f6 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a1799b1dfb2f2d8ee8909df09036e88f6"></a>
 std::size_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getPort</b> ()</td></tr>
-<tr class="separator:adcfd2a2188883ab90f5118d37b922fc1 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a1799b1dfb2f2d8ee8909df09036e88f6 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a505ce023c19478eeee34e0e09edaf628 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a505ce023c19478eeee34e0e09edaf628"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setIp</b> (std::string ip)</td></tr>
 <tr class="separator:a505ce023c19478eeee34e0e09edaf628 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86b9a2a7154d53f5d4a9cedceeac7432 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a86b9a2a7154d53f5d4a9cedceeac7432"></a>
+<tr class="memitem:a0f915894f0e0a5cc132ea11a01cd1cd5 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a0f915894f0e0a5cc132ea11a01cd1cd5"></a>
 std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getIp</b> ()</td></tr>
-<tr class="separator:a86b9a2a7154d53f5d4a9cedceeac7432 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a0f915894f0e0a5cc132ea11a01cd1cd5 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4192e5a6b24c20942f28986fb1702628 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a4192e5a6b24c20942f28986fb1702628"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setAddr</b> (sockaddr_in addr)</td></tr>
 <tr class="separator:a4192e5a6b24c20942f28986fb1702628 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e0151bce583568881dbfe1fd5cb3730 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a2e0151bce583568881dbfe1fd5cb3730"></a>
+<tr class="memitem:aa56991920afb08181a7bd0996b27eea1 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="aa56991920afb08181a7bd0996b27eea1"></a>
 sockaddr_in &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getAddr</b> ()</td></tr>
-<tr class="separator:a2e0151bce583568881dbfe1fd5cb3730 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:aa56991920afb08181a7bd0996b27eea1 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8c7ff8bf33b4afd8eeaa37e7a8f3327 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="af8c7ff8bf33b4afd8eeaa37e7a8f3327"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setSocket</b> (int socket)</td></tr>
 <tr class="separator:af8c7ff8bf33b4afd8eeaa37e7a8f3327 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a97cca92364bd3100c00ca774e68f1b inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a7a97cca92364bd3100c00ca774e68f1b"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>getSocket</b> ()</td></tr>
 <tr class="separator:a7a97cca92364bd3100c00ca774e68f1b inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a148726d03c4a7579e29157fb406b0430 inherit pub_methods_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a148726d03c4a7579e29157fb406b0430"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> () override</td></tr>
+<tr class="separator:a148726d03c4a7579e29157fb406b0430 inherit pub_methods_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classIProtocol"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classIProtocol')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classIProtocol.html">IProtocol</a></td></tr>
+<tr class="memitem:a2be3b4ad3479312fcbe04a9b902c7fdc inherit pub_methods_classIProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a2be3b4ad3479312fcbe04a9b902c7fdc"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>send_data</b> (std::vector&lt; uint8_t &gt; &amp;data)=0</td></tr>
+<tr class="separator:a2be3b4ad3479312fcbe04a9b902c7fdc inherit pub_methods_classIProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aa840402ab5d4f9e657d9bf081a3e76 inherit pub_methods_classIProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a9aa840402ab5d4f9e657d9bf081a3e76"></a>
+virtual std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>receive_data</b> ()=0</td></tr>
+<tr class="separator:a9aa840402ab5d4f9e657d9bf081a3e76 inherit pub_methods_classIProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -152,6 +178,15 @@ sockaddr_in&#160;</td><td class="memItemRight" valign="bottom"><b>_addr</b></td>
 <tr class="memitem:abf7f8bcd0cbfec9a2172ce1a06741200 inherit pro_attribs_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="abf7f8bcd0cbfec9a2172ce1a06741200"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>_socket</b></td></tr>
 <tr class="separator:abf7f8bcd0cbfec9a2172ce1a06741200 inherit pro_attribs_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab305f167a356718b543974a2ab3ffe56 inherit pro_attribs_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="ab305f167a356718b543974a2ab3ffe56"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_type</b></td></tr>
+<tr class="separator:ab305f167a356718b543974a2ab3ffe56 inherit pro_attribs_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc85cf593bae285a2829db1307032413 inherit pro_attribs_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="abc85cf593bae285a2829db1307032413"></a>
+std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_buffer</b></td></tr>
+<tr class="separator:abc85cf593bae285a2829db1307032413 inherit pro_attribs_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5227ac9cf9b7aaa3055003b7f1cc2457 inherit pro_attribs_classAProtocol"><td class="memItemLeft" align="right" valign="top"><a id="a5227ac9cf9b7aaa3055003b7f1cc2457"></a>
+std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>_messageMutex</b></td></tr>
+<tr class="separator:a5227ac9cf9b7aaa3055003b7f1cc2457 inherit pro_attribs_classAProtocol"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/server/udp/<a class="el" href="UDP_8hpp_source.html">UDP.hpp</a></li>

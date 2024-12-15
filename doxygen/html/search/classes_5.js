@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['iprotocol_54',['IProtocol',['../classIProtocol.html',1,'']]]
+  ['health_71',['Health',['../structHealth.html',1,'']]]
 ];
