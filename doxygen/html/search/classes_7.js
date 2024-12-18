@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['killenemy_73',['killEnemy',['../structkillEnemy.html',1,'']]]
+  ['killenemy_77',['killEnemy',['../structkillEnemy.html',1,'']]]
 ];

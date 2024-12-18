@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['enemymove_68',['enemyMove',['../structenemyMove.html',1,'']]],
-  ['entities_69',['Entities',['../classEntities.html',1,'']]]
+  ['enemymove_71',['enemyMove',['../structenemyMove.html',1,'']]],
+  ['entities_72',['Entities',['../classEntities.html',1,'']]]
 ];
