@@ -71,87 +71,21 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a85225af8dc56f92a88c41d5026c5e12e"><td class="memItemLeft" align="right" valign="top"><a id="a85225af8dc56f92a88c41d5026c5e12e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Server</b> (std::size_t tcpPort, std::string tcpIp, std::size_t udpPort, std::string udpIp)</td></tr>
-<tr class="separator:a85225af8dc56f92a88c41d5026c5e12e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b8dc97ca78d98b92176c963f8b5f188"><td class="memItemLeft" align="right" valign="top"><a id="a5b8dc97ca78d98b92176c963f8b5f188"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listen</b> (std::unique_ptr&lt; <a class="el" href="classIProtocol.html">IProtocol</a> &gt; &amp;protocol)</td></tr>
-<tr class="separator:a5b8dc97ca78d98b92176c963f8b5f188"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7eac07d2582fa01c2671362efa955b31"><td class="memItemLeft" align="right" valign="top"><a id="a7eac07d2582fa01c2671362efa955b31"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>start</b> ()</td></tr>
-<tr class="separator:a7eac07d2582fa01c2671362efa955b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4eb15da803c55866a5f47f0b10873d1d"><td class="memItemLeft" align="right" valign="top"><a id="a4eb15da803c55866a5f47f0b10873d1d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>initCommandMapHandle</b> ()</td></tr>
-<tr class="separator:a4eb15da803c55866a5f47f0b10873d1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab83017b4ac1648a0bcf8a7f8411b0763"><td class="memItemLeft" align="right" valign="top"><a id="ab83017b4ac1648a0bcf8a7f8411b0763"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>initCommandMapSend</b> ()</td></tr>
-<tr class="separator:ab83017b4ac1648a0bcf8a7f8411b0763"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab358af02f32a04db6562dbc26c0ac127"><td class="memItemLeft" align="right" valign="top"><a id="ab358af02f32a04db6562dbc26c0ac127"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>initCommandMapGame</b> ()</td></tr>
-<tr class="separator:ab358af02f32a04db6562dbc26c0ac127"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75b3f88707a4ab19d0fbecc3a9cf6412"><td class="memItemLeft" align="right" valign="top"><a id="a75b3f88707a4ab19d0fbecc3a9cf6412"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>connectCommandHandle</b> (std::vector&lt; uint8_t &gt; buffer, std::unique_ptr&lt; <a class="el" href="classIProtocol.html">IProtocol</a> &gt; &amp;protocol)</td></tr>
-<tr class="separator:a75b3f88707a4ab19d0fbecc3a9cf6412"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae27acc42321c55c63c72b10b63c87d39"><td class="memItemLeft" align="right" valign="top"><a id="ae27acc42321c55c63c72b10b63c87d39"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>disconnectCommandHandle</b> (std::vector&lt; uint8_t &gt; buffer, std::unique_ptr&lt; <a class="el" href="classIProtocol.html">IProtocol</a> &gt; &amp;protocol)</td></tr>
-<tr class="separator:ae27acc42321c55c63c72b10b63c87d39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3db6afd323caf1f4ad891b9826763f57"><td class="memItemLeft" align="right" valign="top"><a id="a3db6afd323caf1f4ad891b9826763f57"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>moveCommandHandle</b> (std::vector&lt; uint8_t &gt; buffer, std::unique_ptr&lt; <a class="el" href="classIProtocol.html">IProtocol</a> &gt; &amp;protocol)</td></tr>
-<tr class="separator:a3db6afd323caf1f4ad891b9826763f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33b051302c11c8627322c08076834784"><td class="memItemLeft" align="right" valign="top"><a id="a33b051302c11c8627322c08076834784"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>shootCommandHandle</b> (std::vector&lt; uint8_t &gt; buffer, std::unique_ptr&lt; <a class="el" href="classIProtocol.html">IProtocol</a> &gt; &amp;protocol)</td></tr>
-<tr class="separator:a33b051302c11c8627322c08076834784"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6d18628c840d731fe7866be7b0db65e"><td class="memItemLeft" align="right" valign="top"><a id="ad6d18628c840d731fe7866be7b0db65e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>connectCommandSend</b> (<a class="el" href="structCommand.html">Command</a> *command, std::unique_ptr&lt; <a class="el" href="classIProtocol.html">IProtocol</a> &gt; &amp;protocol)</td></tr>
-<tr class="separator:ad6d18628c840d731fe7866be7b0db65e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab1fde70159dce28ac23af37213a158d"><td class="memItemLeft" align="right" valign="top"><a id="aab1fde70159dce28ac23af37213a158d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>disconnectCommandSend</b> (<a class="el" href="structCommand.html">Command</a> *command, std::unique_ptr&lt; <a class="el" href="classIProtocol.html">IProtocol</a> &gt; &amp;protocol)</td></tr>
-<tr class="separator:aab1fde70159dce28ac23af37213a158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8711f4c2409d22edd970e48bd8038a77"><td class="memItemLeft" align="right" valign="top"><a id="a8711f4c2409d22edd970e48bd8038a77"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>newPlayerCommandSend</b> (<a class="el" href="structCommand.html">Command</a> *command, std::unique_ptr&lt; <a class="el" href="classIProtocol.html">IProtocol</a> &gt; &amp;protocol)</td></tr>
-<tr class="separator:a8711f4c2409d22edd970e48bd8038a77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae910af5b2712c8174ed213c27a9e63af"><td class="memItemLeft" align="right" valign="top"><a id="ae910af5b2712c8174ed213c27a9e63af"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>moveCommandSend</b> (<a class="el" href="structCommand.html">Command</a> *command, std::unique_ptr&lt; <a class="el" href="classIProtocol.html">IProtocol</a> &gt; &amp;protocol)</td></tr>
-<tr class="separator:ae910af5b2712c8174ed213c27a9e63af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9f3c87a0b813c4c3cfa08225ff661e9"><td class="memItemLeft" align="right" valign="top"><a id="ae9f3c87a0b813c4c3cfa08225ff661e9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>shootCommandSend</b> (<a class="el" href="structCommand.html">Command</a> *command, std::unique_ptr&lt; <a class="el" href="classIProtocol.html">IProtocol</a> &gt; &amp;protocol)</td></tr>
-<tr class="separator:ae9f3c87a0b813c4c3cfa08225ff661e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cf880b99763bb197a6aec12a87cbcf0"><td class="memItemLeft" align="right" valign="top"><a id="a6cf880b99763bb197a6aec12a87cbcf0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>mapCommandSend</b> (<a class="el" href="structCommand.html">Command</a> *command, std::unique_ptr&lt; <a class="el" href="classIProtocol.html">IProtocol</a> &gt; &amp;protocol)</td></tr>
-<tr class="separator:a6cf880b99763bb197a6aec12a87cbcf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78677707185a537aa06da0680027cf9d"><td class="memItemLeft" align="right" valign="top"><a id="a78677707185a537aa06da0680027cf9d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>enemyMoveCommandSend</b> (<a class="el" href="structCommand.html">Command</a> *command, std::unique_ptr&lt; <a class="el" href="classIProtocol.html">IProtocol</a> &gt; &amp;protocol)</td></tr>
-<tr class="separator:a78677707185a537aa06da0680027cf9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24fd75e6b158ea3bd14b90bad999e046"><td class="memItemLeft" align="right" valign="top"><a id="a24fd75e6b158ea3bd14b90bad999e046"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>createEnemyCommandSend</b> (<a class="el" href="structCommand.html">Command</a> *command, std::unique_ptr&lt; <a class="el" href="classIProtocol.html">IProtocol</a> &gt; &amp;protocol)</td></tr>
-<tr class="separator:a24fd75e6b158ea3bd14b90bad999e046"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fd2d636b1aeac92a34032f2dfe371f6"><td class="memItemLeft" align="right" valign="top"><a id="a2fd2d636b1aeac92a34032f2dfe371f6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>killEnemyCommandSend</b> (<a class="el" href="structCommand.html">Command</a> *command, std::unique_ptr&lt; <a class="el" href="classIProtocol.html">IProtocol</a> &gt; &amp;protocol)</td></tr>
-<tr class="separator:a2fd2d636b1aeac92a34032f2dfe371f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a6a4eea135df5025b93766d740ac088"><td class="memItemLeft" align="right" valign="top"><a id="a9a6a4eea135df5025b93766d740ac088"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>connectCommandGame</b> (<a class="el" href="structCommand.html">Command</a> *command)</td></tr>
-<tr class="separator:a9a6a4eea135df5025b93766d740ac088"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8f8716f6f66db03f3efe41ed1b106e4"><td class="memItemLeft" align="right" valign="top"><a id="ac8f8716f6f66db03f3efe41ed1b106e4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>disconnectCommandGame</b> (<a class="el" href="structCommand.html">Command</a> *command)</td></tr>
-<tr class="separator:ac8f8716f6f66db03f3efe41ed1b106e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37c6812cac8fb58f212f16daf4d811bf"><td class="memItemLeft" align="right" valign="top"><a id="a37c6812cac8fb58f212f16daf4d811bf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>moveCommandGame</b> (<a class="el" href="structCommand.html">Command</a> *command)</td></tr>
-<tr class="separator:a37c6812cac8fb58f212f16daf4d811bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec0e06d001a06eff8fd438dc1033332f"><td class="memItemLeft" align="right" valign="top"><a id="aec0e06d001a06eff8fd438dc1033332f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>killEnemyCommandGame</b> (<a class="el" href="structCommand.html">Command</a> *command)</td></tr>
-<tr class="separator:aec0e06d001a06eff8fd438dc1033332f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6117a934bb40f4a403756018bcdb81dd"><td class="memItemLeft" align="right" valign="top"><a id="a6117a934bb40f4a403756018bcdb81dd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>game_loop</b> ()</td></tr>
-<tr class="separator:a6117a934bb40f4a403756018bcdb81dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cd5d2df270bdaf7c1f55c4cdd90ca32"><td class="memItemLeft" align="right" valign="top"><a id="a5cd5d2df270bdaf7c1f55c4cdd90ca32"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>world_update</b> ()</td></tr>
-<tr class="separator:a5cd5d2df270bdaf7c1f55c4cdd90ca32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ae249752190245f63fd17585b8148f8"><td class="memItemLeft" align="right" valign="top"><a id="a4ae249752190245f63fd17585b8148f8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>load_component</b> ()</td></tr>
+<tr class="separator:a4ae249752190245f63fd17585b8148f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1016678b77eacc5aa97f2310f8b442b1"><td class="memItemLeft" align="right" valign="top"><a id="a1016678b77eacc5aa97f2310f8b442b1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> ()</td></tr>
+<tr class="separator:a1016678b77eacc5aa97f2310f8b442b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b6d4d3d5354395c6a818f7c5b52246a"><td class="memItemLeft" align="right" valign="top"><a id="a1b6d4d3d5354395c6a818f7c5b52246a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listen</b> (IProtocol *protocol)</td></tr>
+<tr class="separator:a1b6d4d3d5354395c6a818f7c5b52246a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af930f1de9fae4b6739fb8eedabf196f3"><td class="memItemLeft" align="right" valign="top"><a id="af930f1de9fae4b6739fb8eedabf196f3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>game</b> ()</td></tr>
+<tr class="separator:af930f1de9fae4b6739fb8eedabf196f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/server/<a class="el" href="Server_8hpp_source.html">Server.hpp</a></li>
-<li>src/server/GameCommand.cpp</li>
-<li>src/server/HandleCommand.cpp</li>
-<li>src/server/SendCommand.cpp</li>
 <li>src/server/Server.cpp</li>
 </ul>
 </div><!-- contents -->

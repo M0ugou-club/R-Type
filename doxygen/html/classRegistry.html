@@ -101,10 +101,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8af690a38f4982d9479401e7c69c33d2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classRegistry.html#a8af690a38f4982d9479401e7c69c33d2">remove_component</a> (<a class="el" href="classEntities.html">entity_t</a> const &amp;from)</td></tr>
 <tr class="memdesc:a8af690a38f4982d9479401e7c69c33d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a component from an entity.  <a href="classRegistry.html#a8af690a38f4982d9479401e7c69c33d2">More...</a><br /></td></tr>
 <tr class="separator:a8af690a38f4982d9479401e7c69c33d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4292cc1bb221b0d6ec24a3184c592e27"><td class="memTemplParams" colspan="2">template&lt;typename Component &gt; </td></tr>
+<tr class="memitem:a4292cc1bb221b0d6ec24a3184c592e27"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classRegistry.html#a4292cc1bb221b0d6ec24a3184c592e27">resize_component</a> (<a class="el" href="classEntities.html">entity_t</a> const &amp;to)</td></tr>
+<tr class="memdesc:a4292cc1bb221b0d6ec24a3184c592e27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize a component from an entity size.  <a href="classRegistry.html#a4292cc1bb221b0d6ec24a3184c592e27">More...</a><br /></td></tr>
+<tr class="separator:a4292cc1bb221b0d6ec24a3184c592e27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Entity Management</div></td></tr>
 <tr class="memitem:ad81bdeebc99ce487b6a2b667d4e49674"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEntities.html">entity_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRegistry.html#ad81bdeebc99ce487b6a2b667d4e49674">spawn_entity</a> ()</td></tr>
 <tr class="memdesc:ad81bdeebc99ce487b6a2b667d4e49674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new entity.  <a href="classRegistry.html#ad81bdeebc99ce487b6a2b667d4e49674">More...</a><br /></td></tr>
 <tr class="separator:ad81bdeebc99ce487b6a2b667d4e49674"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44def5f9557c29af1c44e82d3f9c8e19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEntities.html">entity_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRegistry.html#a44def5f9557c29af1c44e82d3f9c8e19">spawn_entity</a> (std::size_t id)</td></tr>
+<tr class="memdesc:a44def5f9557c29af1c44e82d3f9c8e19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new entity with a precize id.  <a href="classRegistry.html#a44def5f9557c29af1c44e82d3f9c8e19">More...</a><br /></td></tr>
+<tr class="separator:a44def5f9557c29af1c44e82d3f9c8e19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7886237a4856f5bd74110cdd7acdef9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEntities.html">entity_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRegistry.html#ac7886237a4856f5bd74110cdd7acdef9">entity_from_index</a> (std::size_t idx)</td></tr>
 <tr class="memdesc:ac7886237a4856f5bd74110cdd7acdef9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves an entity by its index.  <a href="classRegistry.html#ac7886237a4856f5bd74110cdd7acdef9">More...</a><br /></td></tr>
 <tr class="separator:ac7886237a4856f5bd74110cdd7acdef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -533,8 +540,50 @@ template&lt;typename Component &gt; </div>
 
 </div>
 </div>
+<a id="a4292cc1bb221b0d6ec24a3184c592e27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4292cc1bb221b0d6ec24a3184c592e27">&#9670;&nbsp;</a></span>resize_component()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Component &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Registry::resize_component </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classEntities.html">entity_t</a> const &amp;&#160;</td>
+          <td class="paramname"><em>to</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resize a component from an entity size. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Component</td><td>The type of the component to resize. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">from</td><td>The entity from which the component will be resize. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ad81bdeebc99ce487b6a2b667d4e49674"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad81bdeebc99ce487b6a2b667d4e49674">&#9670;&nbsp;</a></span>spawn_entity()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad81bdeebc99ce487b6a2b667d4e49674">&#9670;&nbsp;</a></span>spawn_entity() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -558,6 +607,42 @@ template&lt;typename Component &gt; </div>
 
 <p>Creates a new entity. </p>
 <p>Reuses an available entity ID if possible or generates a new one.</p>
+<dl class="section return"><dt>Returns</dt><dd>The newly created entity. </dd></dl>
+
+</div>
+</div>
+<a id="a44def5f9557c29af1c44e82d3f9c8e19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44def5f9557c29af1c44e82d3f9c8e19">&#9670;&nbsp;</a></span>spawn_entity() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classEntities.html">entity_t</a> Registry::spawn_entity </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new entity with a precize id. </p>
+<p>Reuses an available entity ID if possible or generates a new one if the id in parameters is already atrivute.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The entity to destroy </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>The newly created entity. </dd></dl>
 
 </div>

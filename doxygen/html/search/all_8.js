@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['kill_5fentity_33',['kill_entity',['../classRegistry.html#a4011de96bee64239dc1847afa427e7ee',1,'Registry']]],
-  ['killenemy_34',['killEnemy',['../structkillEnemy.html',1,'']]]
+  ['kill_5fentity_32',['kill_entity',['../classRegistry.html#a4011de96bee64239dc1847afa427e7ee',1,'Registry']]]
 ];

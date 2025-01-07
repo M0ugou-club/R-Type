@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['draw_70',['Draw',['../structDraw.html',1,'']]]
+  ['commandgame_61',['CommandGame',['../classCommandGame.html',1,'']]],
+  ['commandhandle_62',['CommandHandle',['../classCommandHandle.html',1,'']]],
+  ['commandsend_63',['CommandSend',['../classCommandSend.html',1,'']]],
+  ['control_64',['Control',['../structControl.html',1,'']]]
 ];

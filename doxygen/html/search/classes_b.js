@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['registry_82',['Registry',['../classRegistry.html',1,'']]],
-  ['repconnect_83',['repConnect',['../structrepConnect.html',1,'']]]
+  ['position_75',['Position',['../structPosition.html',1,'']]]
 ];
