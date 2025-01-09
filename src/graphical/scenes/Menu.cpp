@@ -104,7 +104,8 @@ void Menu::keyHandler(keyType key) {
       if (key != lastKey) {
         if (key == keyType::BACKSPACE) {
           if (!input.getText().empty()) {
-            input.setText(input.getText().substr(0, input.getText().size() - 1));
+            input.setText(
+                input.getText().substr(0, input.getText().size() - 1));
           }
           input.draw();
           lastKey = key;

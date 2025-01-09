@@ -12,10 +12,9 @@
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <iostream>
-#include <stdexcept>
 #include <memory>
+#include <stdexcept>
 #include <string>
-
 
 class InputText {
 public:

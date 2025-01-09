@@ -273,5 +273,5 @@ void Window::drawInputTexts() {
 }
 
 void Window::handleInputTextEvent(float mouseX, float mouseY, eventType event) {
-  
+
 }
