@@ -26,12 +26,27 @@ Text::~Text() {
 }
 
 void Text::init() {
+  if (!_font) {
+    throw std::runtime_error("Font not loaded. Ensure TTF_OpenFont succeeded.");
+  }
   SDL_Surface *surface =
-      TTF_RenderText_Blended(_font, (_text).c_str(), (_text).length(), _color);
-  _texture = SDL_CreateTextureFromSurface(_renderer, surface);
+      TTF_RenderText_Blended(_font, _text.c_str(), _text.length(), _color);
+  if (!surface) {
+    throw std::runtime_error(std::string("Failed to create text surface: ") +
+                             SDL_GetError());
+  }
 
-  _rect.w = static_cast<float>(surface->w);
-  _rect.h = static_cast<float>(surface->h);
+  _texture = SDL_CreateTextureFromSurface(_renderer, surface);
+  if (!_texture) {
+    SDL_DestroySurface(surface);
+    throw std::runtime_error(std::string("Failed to create texture: ") +
+                             SDL_GetError());
+  }
+
+  _rect.w = surface->w;
+  _rect.h = surface->h;
+
+  SDL_DestroySurface(surface);
 }
 
 void Text::drawText() {
@@ -70,4 +85,17 @@ std::string Text::getText() { return _text; }
 void Text::setPos(int x, int y) {
   _rect.x = x;
   _rect.y = y;
+}
+
+void Text::setText(std::string text) {
+  _text = text;
+  if (_texture) {
+    SDL_DestroyTexture(_texture);
+    _texture = nullptr;
+  }
+
+  SDL_Surface *surface =
+      TTF_RenderText_Blended(_font, (_text).c_str(), (_text).length(), _color);
+  _texture = SDL_CreateTextureFromSurface(_renderer, surface);
+  SDL_DestroySurface(surface);
 }

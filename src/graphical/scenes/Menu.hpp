@@ -22,6 +22,8 @@ public:
 
   std::string mouseHandler(float mouseX, float mouseY, eventType event);
 
+  void keyHandler(keyType key);
+
   void setMenu(std::string selectedButton);
 
 private:
