@@ -1,8 +1,7 @@
 #include "EntitiesGestion.hpp"
 
 Entities create_player_entity(Registry &r, Position position, Velocity velocity,
-                              Health health, Draw draw,
-                              Nickname nickname,
+                              Health health, Draw draw, Nickname nickname,
                               std::optional<Control> control,
                               std::optional<std::size_t> id) {
   auto entity = id.has_value() ? r.spawn_entity(id.value()) : r.spawn_entity();
