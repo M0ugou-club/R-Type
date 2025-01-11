@@ -53,6 +53,10 @@ public:
                  SDL_Color normalTextColor = {255, 255, 255, 255},
                  SDL_Color hoverTextColor = {0, 0, 0, 0});
 
+  void addButton(float x, float y, float w, float h,
+                 const char *normalSpritePath, const char *hoverSpritePath,
+                 const std::string &text, const std::string &tag = "");
+
   void addDropdown(float x, float y, float width, float height,
                    std::vector<std::string> options, std::string tag);
 
@@ -92,7 +96,7 @@ public:
 
   void addInputText(float x, float y, float width, float height,
                     const std::string &fontPath, SDL_Color color,
-                    const std::string &tag);
+                    const std::string &tag, const std::string &placeholder);
 
   void startTextInput();
 
@@ -100,7 +104,13 @@ public:
 
   void drawInputTexts();
 
+  void deleteInputTexts(const std::string &tag = "");
+
+  void deletedropdowns(const std::string &tag = "");
+
   void handleInputTextEvent(float mouseX, float mouseY, eventType event);
+
+  void setButtonTextureDirty(const std::string &tag = "");
 
   std::vector<InputText> &getInputTexts() { return _inputTexts; }
 

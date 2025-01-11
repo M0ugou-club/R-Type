@@ -11,12 +11,11 @@
 
 InputText::InputText(float x, float y, float width, float height,
                      SDL_Renderer *renderer, const std::string &fontPath,
-                     SDL_Color color, const std::string &tag)
+                     SDL_Color color, const std::string &tag,
+                     const std::string &placeholder)
     : _x(x), _y(y), _width(width), _height(height), _renderer(renderer),
       _tag(tag), _isSelected(false),
-      _text("4242", x, y, width, height, renderer, 40, fontPath, color) {
-
-  std::cout << "InputText" << _text.getText() << std::endl;
+      _text(placeholder, x, y, width, height, renderer, 40, fontPath, color) {
   _rect = {static_cast<float>(x), static_cast<float>(y), width, height};
 }
 
@@ -25,10 +24,8 @@ InputText::~InputText() {}
 void InputText::init() { _text.init(); }
 
 void InputText::draw() {
-  SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
+  SDL_SetRenderDrawColor(_renderer, 37, 37, 37, 70);
   SDL_RenderFillRect(_renderer, &_rect);
-  SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
-  SDL_RenderRect(_renderer, &_rect);
 
   _text.drawText();
 }

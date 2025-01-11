@@ -12,6 +12,7 @@
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <iostream>
+#include <memory>
 #include <string>
 
 class Button {
@@ -21,6 +22,11 @@ public:
          SDL_Color hoverColor = {255, 255, 255, 255},
          SDL_Color normalTextColor = {255, 255, 255, 255},
          SDL_Color hoverTextColor = {0, 0, 0, 0}, const std::string &tag = "");
+
+  Button(float x, float y, float w, float h, SDL_Renderer *renderer,
+         const char *normalSpritePath, const char *hoverSpritePath,
+         const std::string &text, const std::string &tag = "");
+
   ~Button();
 
   bool isMouseOver() const;
@@ -39,6 +45,8 @@ public:
 
   SDL_FRect *getRect() { return _rect; }
 
+  void markTexturesDirty();
+
 private:
   SDL_Renderer *_renderer;
   SDL_FRect *_rect;
@@ -48,8 +56,17 @@ private:
   Text _text;
   std::string _tag;
 
+  const char *_normalSpritePath;
+  const char *_hoverSpritePath;
+
   SDL_Color _normalColor;
   SDL_Color _hoverColor;
   SDL_Color _normalTextColor;
   SDL_Color _hoverTextColor;
+
+  SDL_Texture *_normalTexture;
+  SDL_Texture *_hoverTexture;
+  bool _useTextures = false;
+
+  bool _texturesDirty = false;
 };

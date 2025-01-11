@@ -14,7 +14,8 @@ Dropdown::Dropdown(float x, float y, float width, float height,
       _tag(tag) {
   _isOpen = false;
   _optionButtons.push_back(
-      new Button(x, y, width, height, renderer, options[0]));
+      new Button(x, y, width, height, renderer, options[0], {37, 37, 37, 70},
+                 {50, 50, 50, 70}, {255, 255, 255, 255}, {200, 200, 200, 255}));
   for (int i = 1; i < options.size(); i++) {
     _optionButtons.push_back(
         new Button(x, y + (height * i), width, height, renderer, options[i]));

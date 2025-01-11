@@ -24,9 +24,24 @@ public:
 
   void keyHandler(keyType key);
 
-  void setMenu(std::string selectedButton);
+  void setMenu(const std::string &selectedButton);
+
+  void setupHostMenu();
+
+  void setupJoinMenu();
+
+  void setupSettingsMenu();
+
+  void addSpaceshipSelection(std::string window);
+
+  std::string handleButtonClick(float mouseX, float mouseY);
 
 private:
+  std::string _selectedMenu;
   std::string _selectedButton;
   std::string _menuTitle;
+  std::string _selectedSpaceship;
+  std::string _selectedWeapon;
+  std::string _toUpdate;
+  bool _windowOpen;
 };
