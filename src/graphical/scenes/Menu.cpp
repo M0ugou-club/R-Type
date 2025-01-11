@@ -12,7 +12,7 @@ Menu::Menu() {
   _selectedButton = "";
 }
 
-Menu::~Menu() {}
+Menu::~Menu() { _window->stopTextInput(); }
 
 void Menu::init() {
   _window->addText("Cosmic Michou", 50, 50, 500, 50, 100,
@@ -36,6 +36,10 @@ void Menu::init() {
       Draw({255, 255, 255, 255}, {700, 300, 887, 484},
            _window->loadTexture("../src/graphical/assets/CreateParty.svg")));
   _ecs.add_component<EntityType>(entitie, EntityType::Menu);
+  _window->addInputText(500, 300, 400, 50,
+                        "../src/graphical/assets/RTypefont.otf",
+                        {255, 255, 255, 255}, "username");
+  _window->startTextInput();
 }
 
 void Menu::setMenu(std::string selectedButton) {
@@ -79,8 +83,42 @@ std::string Menu::mouseHandler(float mouseX, float mouseY, eventType event) {
         return "";
       }
     }
+    for (auto &input : _window->getInputTexts()) {
+      if (input.isClicked(mouseX, mouseY)) {
+        input.setSelected(true);
+      } else {
+        input.setSelected(false);
+      }
+      input.handleEvent(_window->catchEvent());
+    }
   }
   return "";
+}
+
+void Menu::keyHandler(keyType key) {
+  std::string result;
+
+  for (auto &input : _window->getInputTexts()) {
+    if (input.isSelected()) {
+      static keyType lastKey = keyType::NONE;
+      if (key != lastKey) {
+        if (key == keyType::BACKSPACE) {
+          if (!input.getText().empty()) {
+            input.setText(
+                input.getText().substr(0, input.getText().size() - 1));
+          }
+          input.draw();
+          lastKey = key;
+          return;
+        }
+        result = input.getNumber(key);
+        input.setText(input.getText() + result);
+        input.draw();
+        lastKey = key;
+      }
+      return;
+    }
+  }
 }
 
 sceneType
@@ -94,11 +132,12 @@ Menu::loop(eventType event,
   auto &position = _ecs.get_components<Position>();
 
   auto button = mouseHandler(mouseX, mouseY, event);
-  if (button == "Heberger") {
-    _window->deleteTexts();
-    _window->deleteButtons();
-    return sceneType::LOBBY;
-  }
+  keyHandler(key);
+  // if (button == "Heberger") {
+  //   _window->deleteTexts();
+  //   _window->deleteButtons();
+  //   return sceneType::LOBBY;
+  // }
   _window->drawBackground();
   _window->drawButton("menu");
   _window->createMenuPipe();
@@ -114,10 +153,13 @@ Menu::loop(eventType event,
   _window->drawButton("window");
   _window->drawDropdown();
 
+  _window->drawInputTexts();
+  _window->handleInputTextEvent(mouseX, mouseY, event);
+
   if (button == "Quitter") {
     _window->deleteTexts();
     _window->deleteButtons();
-    return sceneType::HISTORY;
+    return sceneType::LOBBY;
   }
 
   return sceneType::NO_SWITCH;

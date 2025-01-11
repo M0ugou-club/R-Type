@@ -30,8 +30,8 @@ void Window::init() {
   // int windowWidth = static_cast<int>(currentMode->w * 0.9);
   // int windowHeight = static_cast<int>(currentMode->h * 0.8);
 
-  int windowWidth = 1200;
-  int windowHeight = 800;
+  int windowWidth = 1920;
+  int windowHeight = 1080;
 
   _window = SDL_CreateWindow("R-Type", windowWidth, windowHeight, 0);
   if (!_window) {
@@ -180,6 +180,32 @@ keyType Window::catchKey() {
     return ESCAPE;
   } else if (keyState[SDL_SCANCODE_SPACE]) {
     return SPACE;
+  } else if (keyState[SDL_SCANCODE_RETURN]) {
+    return ENTER;
+  } else if (keyState[SDL_SCANCODE_BACKSPACE]) {
+    return BACKSPACE;
+  } else if (keyState[SDL_SCANCODE_PERIOD]) {
+    return PERIOD;
+  } else if (keyState[SDL_SCANCODE_1]) {
+    return ONE;
+  } else if (keyState[SDL_SCANCODE_2]) {
+    return TWO;
+  } else if (keyState[SDL_SCANCODE_3]) {
+    return THREE;
+  } else if (keyState[SDL_SCANCODE_4]) {
+    return FOUR;
+  } else if (keyState[SDL_SCANCODE_5]) {
+    return FIVE;
+  } else if (keyState[SDL_SCANCODE_6]) {
+    return SIX;
+  } else if (keyState[SDL_SCANCODE_7]) {
+    return SEVEN;
+  } else if (keyState[SDL_SCANCODE_8]) {
+    return EIGHT;
+  } else if (keyState[SDL_SCANCODE_9]) {
+    return NINE;
+  } else if (keyState[SDL_SCANCODE_0]) {
+    return ZERO;
   }
   return NONE;
 }
@@ -224,4 +250,28 @@ void Window::deleteText(std::string text) {
       t.destroyText();
     }
   }
+}
+
+void Window::startTextInput() { SDL_StartTextInput(_window); }
+
+void Window::stopTextInput() { SDL_StopTextInput(_window); }
+
+void Window::addInputText(float x, float y, float width, float height,
+                          const std::string &fontPath, SDL_Color color,
+                          const std::string &tag) {
+  InputText input =
+      InputText(x, y, width, height, _renderer, fontPath, color, tag);
+  input.init();
+
+  _inputTexts.push_back(input);
+}
+
+void Window::drawInputTexts() {
+  for (auto &input : _inputTexts) {
+    input.draw();
+  }
+}
+
+void Window::handleInputTextEvent(float mouseX, float mouseY, eventType event) {
+
 }
