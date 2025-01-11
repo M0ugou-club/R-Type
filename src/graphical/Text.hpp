@@ -24,6 +24,7 @@ public:
   void setColor(SDL_Color color);
   std::string getText();
   void setPos(int x, int y);
+  void setText(std::string text);
 
 private:
   std::string _text;

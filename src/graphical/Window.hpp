@@ -9,6 +9,7 @@
 
 #include "Button.hpp"
 #include "Dropdown.hpp"
+#include "InputText.hpp"
 #include "Text.hpp"
 #include "Utils.hpp"
 #include <SDL3/SDL.h>
@@ -89,6 +90,20 @@ public:
 
   void setTextPos(std::string text, int x, int y);
 
+  void addInputText(float x, float y, float width, float height,
+                    const std::string &fontPath, SDL_Color color,
+                    const std::string &tag);
+
+  void startTextInput();
+
+  void stopTextInput();
+
+  void drawInputTexts();
+
+  void handleInputTextEvent(float mouseX, float mouseY, eventType event);
+
+  std::vector<InputText> &getInputTexts() { return _inputTexts; }
+
 private:
   SDL_Window *_window;
   SDL_Renderer *_renderer;
@@ -97,4 +112,5 @@ private:
   std::vector<Text> _texts;
   std::vector<Button> _buttons;
   std::vector<std::unique_ptr<Dropdown>> _dropdowns;
+  std::vector<InputText> _inputTexts;
 };
