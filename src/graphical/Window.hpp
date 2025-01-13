@@ -119,9 +119,6 @@ public:
   void setButtonTextureDirty(const std::string &tag = "");
 
   std::vector<InputText> &getInputTexts() { return _inputTexts; }
-  void setAllowToInteract(bool allow) { _allowToInteract = allow; }
-
-  bool getAllowToInteract() { return _allowToInteract; }
 
 private:
   SDL_Window *_window;
