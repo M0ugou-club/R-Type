@@ -92,7 +92,13 @@ public:
 
   void deleteText(std::string text);
 
+  int getNumberText() { return _texts.size(); }
+
   void setTextPos(std::string text, int x, int y);
+
+  void setAllowToInteract(bool allow) { _allowToInteract = allow; }
+
+  bool getAllowToInteract() { return _allowToInteract; }
 
   void addInputText(float x, float y, float width, float height,
                     const std::string &fontPath, SDL_Color color,
@@ -113,6 +119,9 @@ public:
   void setButtonTextureDirty(const std::string &tag = "");
 
   std::vector<InputText> &getInputTexts() { return _inputTexts; }
+  void setAllowToInteract(bool allow) { _allowToInteract = allow; }
+
+  bool getAllowToInteract() { return _allowToInteract; }
 
 private:
   SDL_Window *_window;
@@ -123,4 +132,5 @@ private:
   std::vector<Button> _buttons;
   std::vector<std::unique_ptr<Dropdown>> _dropdowns;
   std::vector<InputText> _inputTexts;
+  bool _allowToInteract;
 };
