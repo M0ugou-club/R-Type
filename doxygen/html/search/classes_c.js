@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['registry_76',['Registry',['../classRegistry.html',1,'']]]
+  ['server_0',['Server',['../classServer.html',1,'']]],
+  ['sparsearray_1',['SparseArray',['../classSparseArray.html',1,'']]]
 ];

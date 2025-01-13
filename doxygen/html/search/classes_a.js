@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['onevsone_74',['OneVsOne',['../classOneVsOne.html',1,'']]]
+  ['onevsone_0',['OneVsOne',['../classOneVsOne.html',1,'']]]
 ];

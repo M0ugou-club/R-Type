@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['commandgame_61',['CommandGame',['../classCommandGame.html',1,'']]],
-  ['commandhandle_62',['CommandHandle',['../classCommandHandle.html',1,'']]],
-  ['commandsend_63',['CommandSend',['../classCommandSend.html',1,'']]],
-  ['control_64',['Control',['../structControl.html',1,'']]]
+  ['choosingparams_0',['ChoosingParams',['../structChoosingParams.html',1,'']]],
+  ['commandgame_1',['CommandGame',['../classCommandGame.html',1,'']]],
+  ['commandhandle_2',['CommandHandle',['../classCommandHandle.html',1,'']]],
+  ['commandsend_3',['CommandSend',['../classCommandSend.html',1,'']]]
 ];

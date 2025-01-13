@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['value_5ftype_54',['value_type',['../classSparseArray.html#a51cab75e1e237afec3ac9b87ea94e9d3',1,'SparseArray']]],
-  ['velocity_55',['Velocity',['../structVelocity.html',1,'']]]
+  ['wave_0',['Wave',['../classWave.html',1,'']]],
+  ['window_1',['Window',['../classWindow.html',1,'']]]
 ];

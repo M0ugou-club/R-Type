@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['text_79',['Text',['../classText.html',1,'']]]
+  ['wave_0',['Wave',['../classWave.html',1,'']]],
+  ['window_1',['Window',['../classWindow.html',1,'']]]
 ];

@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['game_22',['Game',['../classGame.html',1,'']]],
-  ['get_5fa_5fcomponent_23',['get_a_component',['../classRegistry.html#a16ed8414c745b3411e33bd5f1a624a83',1,'Registry']]],
-  ['get_5favailable_5fentities_24',['get_available_entities',['../classRegistry.html#a5aaa135bdfa484deb235880fc11b6a4d',1,'Registry']]],
-  ['get_5fcomponents_25',['get_components',['../classRegistry.html#a620836933318f3b6b1a55eab40efe3d4',1,'Registry::get_components()'],['../classRegistry.html#ad51c652b622249844c574b254897eb26',1,'Registry::get_components() const']]],
-  ['get_5findex_26',['get_index',['../classSparseArray.html#a15ea7c30a1b97f67036b9b1ffcecb715',1,'SparseArray']]]
+  ['game_0',['Game',['../classGame.html',1,'']]],
+  ['get_5fa_5fcomponent_1',['get_a_component',['../classRegistry.html#a9a14f992b0caec915367c6a41755b758',1,'Registry']]],
+  ['get_5favailable_5fentities_2',['get_available_entities',['../classRegistry.html#a67f78ad84cf42702c76618bca245255b',1,'Registry']]],
+  ['get_5fcomponents_3',['get_components',['../classRegistry.html#ab8ff3522b765d882b46262ad345db07b',1,'Registry::get_components()'],['../classRegistry.html#a938c4c35e4ed88d22351735c9ac2f114',1,'Registry::get_components() const']]],
+  ['get_5findex_4',['get_index',['../classSparseArray.html#a15ea7c30a1b97f67036b9b1ffcecb715',1,'SparseArray']]]
 ];

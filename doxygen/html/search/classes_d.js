@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['server_77',['Server',['../classServer.html',1,'']]],
-  ['sparsearray_78',['SparseArray',['../classSparseArray.html',1,'']]]
+  ['text_0',['Text',['../classText.html',1,'']]]
 ];
