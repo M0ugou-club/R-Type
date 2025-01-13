@@ -6,11 +6,11 @@
 */
 
 #pragma once
-#include <unordered_map>
-#include <array>
-#include <string>
-#include <stdint.h>
 #include <SDL3/SDL.h>
+#include <array>
+#include <stdint.h>
+#include <string>
+#include <unordered_map>
 
 enum sceneType {
   MENU,
