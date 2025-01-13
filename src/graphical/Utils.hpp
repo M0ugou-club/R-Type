@@ -12,6 +12,8 @@
 #include <string>
 #include <unordered_map>
 
+#include <iostream>
+
 enum sceneType {
   MENU,
   HISTORY,
@@ -46,3 +48,9 @@ enum keyType {
 };
 
 enum eventType { MOUSE_CLICK, CLOSE_WINDOW, NO_EVENT };
+
+struct ChoosingParams {
+  std::string ip;
+  int spaceshipId;
+  int bulletId;
+};

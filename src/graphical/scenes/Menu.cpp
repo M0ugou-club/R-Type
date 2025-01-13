@@ -267,9 +267,13 @@ Menu::loop(eventType event,
     if (button == "Hoster") {
       _window->deleteTexts();
       _window->deleteButtons();
+      _params->ip = "127.0.0.1";
+      _params->spaceshipId = 1;
+      _params->bulletId = 1;
       return sceneType::LOBBY;
     }
   }
+
   _window->drawBackground();
   _window->drawButton("menu");
   _window->createMenuPipe();
