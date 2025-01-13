@@ -29,6 +29,7 @@ public:
   bool isClicked(float mouseX, float mouseY);
   bool getIsOpen() { return _isOpen; };
   void moveButtonToTop();
+  std::string getTag() { return _tag; };
 
 private:
   float _x, _y, _width, _height;

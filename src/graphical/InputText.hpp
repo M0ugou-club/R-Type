@@ -20,7 +20,7 @@ class InputText {
 public:
   InputText(float x, float y, float width, float height, SDL_Renderer *renderer,
             const std::string &fontPath, SDL_Color color,
-            const std::string &tag);
+            const std::string &tag, const std::string &placeholder);
   ~InputText();
 
   void init();

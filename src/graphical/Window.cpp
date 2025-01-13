@@ -125,6 +125,30 @@ void Window::addDropdown(float x, float y, float width, float height,
   _dropdowns.back()->init();
 }
 
+void Window::deletedropdowns(const std::string &tag) {
+  if (tag.empty()) {
+    _dropdowns.clear();
+  } else {
+    _dropdowns.erase(std::remove_if(_dropdowns.begin(), _dropdowns.end(),
+                                    [&tag](const std::unique_ptr<Dropdown> &d) {
+                                      return d->getTag() == tag;
+                                    }),
+                     _dropdowns.end());
+  }
+}
+
+void Window::deleteInputTexts(const std::string &tag) {
+  if (tag.empty()) {
+    _inputTexts.clear();
+  } else {
+    _inputTexts.erase(std::remove_if(_inputTexts.begin(), _inputTexts.end(),
+                                     [&tag](const InputText &input) {
+                                       return input.getTag() == tag;
+                                     }),
+                      _inputTexts.end());
+  }
+}
+
 void Window::render() { SDL_RenderPresent(_renderer); }
 
 void Window::clear() { SDL_RenderClear(_renderer); }
@@ -233,6 +257,7 @@ int Window::getMouseState(float *x, float *y) {
 void Window::deleteTexts() { _texts.clear(); }
 
 void Window::deleteButtons(const std::string &tag) {
+  std::cout << "deleting buttons" << std::endl;
   if (tag.empty()) {
     _buttons.clear();
   } else {
@@ -266,9 +291,10 @@ void Window::stopTextInput() { SDL_StopTextInput(_window); }
 
 void Window::addInputText(float x, float y, float width, float height,
                           const std::string &fontPath, SDL_Color color,
-                          const std::string &tag) {
-  InputText input =
-      InputText(x, y, width, height, _renderer, fontPath, color, tag);
+                          const std::string &tag,
+                          const std::string &placeholder) {
+  InputText input = InputText(x, y, width, height, _renderer, fontPath, color,
+                              tag, placeholder);
   input.init();
 
   _inputTexts.push_back(input);
@@ -282,4 +308,21 @@ void Window::drawInputTexts() {
 
 void Window::handleInputTextEvent(float mouseX, float mouseY, eventType event) {
 
+}
+
+void Window::addButton(float x, float y, float w, float h,
+                       const char *normalSpritePath,
+                       const char *hoverSpritePath, const std::string &text,
+                       const std::string &tag) {
+  _buttons.emplace_back(x, y, w, h, _renderer, normalSpritePath,
+                        hoverSpritePath, text, tag);
+  _buttons.back().init();
+}
+
+void Window::setButtonTextureDirty(const std::string &tag) {
+  for (auto &button : _buttons) {
+    if (button.getTag() == tag) {
+      button.markTexturesDirty();
+    }
+  }
 }
