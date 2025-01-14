@@ -75,7 +75,8 @@ void Wave::load_enemy(const json &enemy, Queue &queue) {
 void Wave::load(std::string path, Queue &queue) {
   std::ifstream file(path);
   if (!file.is_open()) {
-    throw std::runtime_error("Impossible d'ouvrir le fichier : " + path);
+    std::cout << "Impossible d'ouvrir le fichier : " << path << std::endl;
+    return;
   }
 
   auto parsed_file = json::parse(file);

@@ -18,6 +18,29 @@ EndLess::~EndLess() {}
 
 void EndLess::init() { _wave = Wave(_ecs); }
 
+bool EndLess::waveIsClear() {
+  auto &entityType = _ecs->get_components<EntityType>();
+
+  for (std::size_t i = 0; i < entityType.size(); i++) {
+    if (entityType[i] == EntityType::Enemy) {
+      return false;
+    }
+  }
+  return true;
+}
+
+void EndLess::waveGestion() {
+  static std::random_device rd;
+  static std::mt19937 gen(rd());
+  std::uniform_int_distribution<> dis(0, 9);
+  int random = dis(gen);
+
+  if (waveIsClear()) {
+    std::cout << "load " << random << " wave" << std::endl;
+    _wave.load(classicWave[random], *_queue);
+  }
+}
+
 sceneType
 EndLess::loop(std::chrono::time_point<std::chrono::steady_clock> deltaTime) {
   Command command;
@@ -44,10 +67,10 @@ EndLess::loop(std::chrono::time_point<std::chrono::steady_clock> deltaTime) {
   if (!_startCooldown) {
     if (_firstRound) {
       _firstRound = false;
-      std::string path = "../src/game/config/endless/wave_type_1.json";
-      _wave.load(path, *_queue);
+      _wave.load(classicWave[0], *_queue);
     }
     if (now > deltaTime) {
+      waveGestion();
       enemy_system(_ecs);
       position_system_net(1, _ecs, _queue);
       collision_system(_ecs, _queue);
