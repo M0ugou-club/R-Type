@@ -73,6 +73,7 @@ void Wave::load_enemy(const json &enemy, Queue &queue) {
 };
 
 void Wave::load(std::string path, Queue &queue) {
+  std::cout << path << std::endl;
   std::ifstream file(path);
   if (!file.is_open()) {
     std::cout << "Impossible d'ouvrir le fichier : " << path << std::endl;

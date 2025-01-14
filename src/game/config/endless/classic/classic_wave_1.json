@@ -14,15 +14,6 @@
         "type": "Zinzolin",
         "number": 1,
         "ia": "Aggressive"
-<<<<<<< HEAD:src/game/config/endless/classic/classic_wave_1.json
     }
     ]
-=======
-    },
-    {
-        "type": "Boss",
-        "number": 1,
-        "ia": "Aggressive"
-    }]
->>>>>>> net:src/game/config/endless/wave_type_1.json
 }
