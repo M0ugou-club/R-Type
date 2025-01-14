@@ -193,18 +193,10 @@ keyType Window::catchKeyOnce() {
   return NONE;
 }
 
-keyType Window::catchKey() {
+std::vector<keyType> Window::catchKey() {
   const bool *keyState = SDL_GetKeyboardState(NULL);
-
-  if (keyState[SDL_SCANCODE_UP]) {
-    return UP;
-  } else if (keyState[SDL_SCANCODE_RIGHT]) {
-    return RIGHT;
-  } else if (keyState[SDL_SCANCODE_DOWN]) {
-    return DOWN;
-  } else if (keyState[SDL_SCANCODE_LEFT]) {
-    return LEFT;
-  } else if (keyState[SDL_SCANCODE_ESCAPE]) {
+  std::vector<keyType> keys;
+  if (keyState[SDL_SCANCODE_ESCAPE]) {
     return ESCAPE;
   } else if (keyState[SDL_SCANCODE_SPACE]) {
     return SPACE;
@@ -236,6 +228,24 @@ keyType Window::catchKey() {
     return ZERO;
   }
   return NONE;
+}
+
+std::vector<keyType> Window::catchMovementKey() {
+  const bool *keyState = SDL_GetKeyboardState(NULL);
+  std::vector<keyType> keys;
+
+  if (keyState[SDL_SCANCODE_UP])
+    keys.push_back(UP);
+  if (keyState[SDL_SCANCODE_RIGHT])
+    keys.push_back(RIGHT);
+  if (keyState[SDL_SCANCODE_DOWN])
+    keys.push_back(DOWN);
+  if (keyState[SDL_SCANCODE_LEFT])
+    keys.push_back(LEFT);
+
+  if (keys.empty())
+    keys.push_back(NONE);
+  return keys;
 }
 
 SDL_Event Window::catchEvent() { return _event; }
