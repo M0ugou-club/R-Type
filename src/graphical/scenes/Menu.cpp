@@ -36,6 +36,23 @@ void Menu::init() {
       entitie,
       Draw({255, 255, 255, 255}, {700, 300, 887, 484},
            _window->loadTexture("../src/graphical/assets/CreateParty.svg")));
+
+  _ecs->add_component<EntityType>(entitie, EntityType::Menu);
+  auto entitie2 = _ecs->spawn_entity();
+  _ecs->add_component<Position>(entitie2, Position(700, 300));
+  _ecs->add_component<Draw>(
+      entitie2,
+      Draw({255, 255, 255, 255}, {710, 470, 686, 117},
+           _window->loadTexture("../src/graphical/assets/dropshadow.svg")));
+  _ecs->add_component<EntityType>(entitie2, EntityType::Menu);
+
+  auto entitie3 = _ecs->spawn_entity();
+  _ecs->add_component<Position>(entitie3, Position(700, 300));
+  _ecs->add_component<Draw>(
+      entitie3,
+      Draw({255, 255, 255, 255}, {710, 580, 686, 117},
+           _window->loadTexture("../src/graphical/assets/dropshadow.svg")));
+  _ecs->add_component<EntityType>(entitie3, EntityType::Menu);
   _window->startTextInput();
 }
 
@@ -270,7 +287,7 @@ Menu::loop(eventType event,
   auto button = mouseHandler(mouseX, mouseY, event);
 
   keyHandler(key[0]);
-  //remove first key
+  // remove first key
   key.erase(key.begin());
 
   if (_selectedSpaceship != "" && _selectedWeapon != "") {

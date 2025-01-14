@@ -196,38 +196,42 @@ keyType Window::catchKeyOnce() {
 std::vector<keyType> Window::catchKey() {
   const bool *keyState = SDL_GetKeyboardState(NULL);
   std::vector<keyType> keys;
+
   if (keyState[SDL_SCANCODE_ESCAPE]) {
-    return ESCAPE;
+    ESCAPE;
   } else if (keyState[SDL_SCANCODE_SPACE]) {
-    return SPACE;
+    keys.push_back(SPACE);
   } else if (keyState[SDL_SCANCODE_RETURN]) {
-    return ENTER;
+    keys.push_back(ENTER);
   } else if (keyState[SDL_SCANCODE_BACKSPACE]) {
-    return BACKSPACE;
+    keys.push_back(BACKSPACE);
   } else if (keyState[SDL_SCANCODE_PERIOD]) {
-    return PERIOD;
+    keys.push_back(PERIOD);
   } else if (keyState[SDL_SCANCODE_1]) {
-    return ONE;
+    keys.push_back(ONE);
   } else if (keyState[SDL_SCANCODE_2]) {
-    return TWO;
+    keys.push_back(TWO);
   } else if (keyState[SDL_SCANCODE_3]) {
-    return THREE;
+    keys.push_back(THREE);
   } else if (keyState[SDL_SCANCODE_4]) {
-    return FOUR;
+    keys.push_back(FOUR);
   } else if (keyState[SDL_SCANCODE_5]) {
-    return FIVE;
+    keys.push_back(FIVE);
   } else if (keyState[SDL_SCANCODE_6]) {
-    return SIX;
+    keys.push_back(SIX);
   } else if (keyState[SDL_SCANCODE_7]) {
-    return SEVEN;
+    keys.push_back(SEVEN);
   } else if (keyState[SDL_SCANCODE_8]) {
-    return EIGHT;
+    keys.push_back(EIGHT);
   } else if (keyState[SDL_SCANCODE_9]) {
-    return NINE;
+    keys.push_back(NINE);
   } else if (keyState[SDL_SCANCODE_0]) {
-    return ZERO;
+    keys.push_back(ZERO);
   }
-  return NONE;
+
+  if (keys.empty())
+    keys.push_back(NONE);
+  return keys;
 }
 
 std::vector<keyType> Window::catchMovementKey() {
