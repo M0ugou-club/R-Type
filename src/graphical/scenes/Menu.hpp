@@ -45,5 +45,9 @@ private:
   std::string _selectedSpaceship;
   std::string _selectedWeapon;
   std::string _toUpdate;
+
+  int _windowWidth;
+  int _windowHeight;
+
   bool _windowOpen;
 };

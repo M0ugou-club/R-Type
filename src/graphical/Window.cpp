@@ -31,8 +31,8 @@ void Window::init() {
   // int windowWidth = static_cast<int>(currentMode->w * 0.9);
   // int windowHeight = static_cast<int>(currentMode->h * 0.8);
 
-  int windowWidth = 1920;
-  int windowHeight = 1080;
+  int windowWidth = 1536;
+  int windowHeight = 864;
 
   _windowWidth = windowWidth;
   _windowHeight = windowHeight;
@@ -258,10 +258,10 @@ void Window::createMenuPipe() {
   SDL_Renderer *renderer = getRenderer();
   SDL_FRect pipeRect;
 
-  pipeRect.x = 45;
-  pipeRect.y = 275;
+  pipeRect.x = 0.02 * _windowWidth;
+  pipeRect.y = 0.2 * _windowHeight;
   pipeRect.w = 5;
-  pipeRect.h = 400;
+  pipeRect.h = 450;
 
   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);

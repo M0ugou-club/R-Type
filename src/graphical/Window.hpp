@@ -126,6 +126,10 @@ public:
 
   void setWindowSize(int width, int height);
 
+  int getWindowWidth() { return _windowWidth; }
+
+  int getWindowHeight() { return _windowHeight; }
+
 private:
   SDL_Window *_window;
   SDL_Renderer *_renderer;
