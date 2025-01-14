@@ -120,6 +120,10 @@ public:
 
   std::vector<InputText> &getInputTexts() { return _inputTexts; }
 
+  std::string getInputTextValue(const std::string &tag);
+
+  void setWindowSize(int width, int height);
+
 private:
   SDL_Window *_window;
   SDL_Renderer *_renderer;
@@ -130,4 +134,6 @@ private:
   std::vector<std::unique_ptr<Dropdown>> _dropdowns;
   std::vector<InputText> _inputTexts;
   bool _allowToInteract;
+  int _windowWidth;
+  int _windowHeight;
 };

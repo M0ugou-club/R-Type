@@ -8,6 +8,8 @@
 #pragma once
 
 #include "AScene.hpp"
+#include <cassert>
+#include <string>
 
 class Menu : public AScene {
 public:

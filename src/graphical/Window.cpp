@@ -20,18 +20,22 @@ void Window::init() {
     exit(84);
   }
 
-  if (!TTF_Init()) {
-    std::cerr << "TTF_Init Error: " << SDL_GetError() << std::endl;
+  if (TTF_Init() == -1) {
+    std::cerr << "TTF_Init Error: " << std::endl;
+    SDL_Quit();
     exit(84);
   }
   SDL_DisplayID displayID = SDL_GetPrimaryDisplay();
   const SDL_DisplayMode *currentMode = SDL_GetCurrentDisplayMode(displayID);
 
-  int windowWidth = static_cast<int>(currentMode->w * 0.9);
-  int windowHeight = static_cast<int>(currentMode->h * 0.8);
+  // int windowWidth = static_cast<int>(currentMode->w * 0.9);
+  // int windowHeight = static_cast<int>(currentMode->h * 0.8);
 
-  // int windowWidth = 1200;
-  // int windowHeight = 800;
+  int windowWidth = 1920;
+  int windowHeight = 1080;
+
+  _windowWidth = windowWidth;
+  _windowHeight = windowHeight;
 
   _window = SDL_CreateWindow("R-Type", windowWidth, windowHeight, 0);
   if (!_window) {
@@ -325,4 +329,19 @@ void Window::setButtonTextureDirty(const std::string &tag) {
       button.markTexturesDirty();
     }
   }
+}
+
+void Window::setWindowSize(int width, int height) {
+  SDL_SetWindowSize(_window, width, height);
+  _windowWidth = width;
+  _windowHeight = height;
+}
+
+std::string Window::getInputTextValue(const std::string &tag) {
+  for (auto &input : _inputTexts) {
+    if (input.getTag() == tag) {
+      return input.getText();
+    }
+  }
+  return "";
 }

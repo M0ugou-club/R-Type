@@ -17,6 +17,7 @@ InputText::InputText(float x, float y, float width, float height,
       _tag(tag), _isSelected(false),
       _text(placeholder, x, y, width, height, renderer, 40, fontPath, color) {
   _rect = {static_cast<float>(x), static_cast<float>(y), width, height};
+  _currentText = placeholder;
 }
 
 InputText::~InputText() {}

@@ -56,6 +56,7 @@ void Menu::init() {
 }
 
 void Menu::setMenu(const std::string &selectedMenu) {
+
   if (selectedMenu == "spaceship1" || selectedMenu == "spaceship2" ||
       selectedMenu == "spaceship3" || selectedMenu == "spaceship4") {
     _selectedSpaceship = selectedMenu;
@@ -65,6 +66,19 @@ void Menu::setMenu(const std::string &selectedMenu) {
   if (selectedMenu == "weapon1" || selectedMenu == "weapon2" ||
       selectedMenu == "weapon3" || selectedMenu == "weapon4") {
     _selectedWeapon = selectedMenu;
+    return;
+  }
+
+  if (selectedMenu == "1920x1080" || selectedMenu == "1664x936" ||
+      selectedMenu == "1536x864") {
+
+    if (selectedMenu == "1920x1080") {
+      _window->setWindowSize(1920, 1080);
+      return;
+    }
+    int width = std::stoi(selectedMenu.substr(0, 4));
+    int height = std::stoi(selectedMenu.substr(5, 3));
+    _window->setWindowSize(width, height);
     return;
   }
 
@@ -113,10 +127,6 @@ void Menu::setupHostMenu() {
                      {37, 37, 37, 70}, {37, 37, 37, 200}, {255, 255, 255, 255},
                      {255, 255, 255, 255});
 
-  _window->addInputText(1300, 380, 250, 50,
-                        "../src/graphical/assets/RTypefont.otf",
-                        {255, 255, 255, 255}, "Heberger_window", "PORT");
-
   _window->addDropdown(730, 380, 500, 50, {"Duel", "Histoire", "EndLess"},
                        "Heberger_window");
 
@@ -130,22 +140,33 @@ void Menu::setupJoinMenu() {
   _window->addText(_menuTitle, 720, 310, 500, 50, 37,
                    "../src/graphical/assets/RTypefont.otf", {0, 0, 0, 0});
 
-  _window->addButton(730, 200 + 500, 830, 50, "Rejoindre la partie",
+  _window->addInputText(730, 380, 250, 50,
+                        "../src/graphical/assets/RTypefont.otf",
+                        {255, 255, 255, 255}, "Rejoindre_window", "127.0.0.1");
+
+  _window->addButton(730, 700, 830, 50, "Rejoindre la partie",
                      "Rejoindre_window", {37, 37, 37, 70}, {37, 37, 37, 200},
                      {255, 255, 255, 255}, {255, 255, 255, 255});
-
-  _window->addInputText(1300, 380, 250, 50,
-                        "../src/graphical/assets/RTypefont.otf",
-                        {255, 255, 255, 255}, "Rejoindre_window", "PORT");
 
   addSpaceshipSelection("Rejoindre");
 }
 
 void Menu::setupSettingsMenu() {
   _menuTitle = "Settings";
+  _windowOpen = true;
 
   _window->addText(_menuTitle, 720, 310, 500, 50, 37,
                    "../src/graphical/assets/RTypefont.otf", {0, 0, 0, 0});
+
+  _window->addButton(730, 700, 220, 50, "1920x1080", "Parametres_window",
+                     {37, 37, 37, 70}, {37, 37, 37, 200}, {255, 255, 255, 255},
+                     {255, 255, 255, 255});
+  _window->addButton(960, 700, 220, 50, "1664x936", "Parametres_window",
+                     {37, 37, 37, 70}, {37, 37, 37, 200}, {255, 255, 255, 255},
+                     {255, 255, 255, 255});
+  _window->addButton(1190, 700, 220, 50, "1536x864", "Parametres_window",
+                     {37, 37, 37, 70}, {37, 37, 37, 200}, {255, 255, 255, 255},
+                     {255, 255, 255, 255});
 }
 
 void Menu::addSpaceshipSelection(std::string window) {
@@ -198,10 +219,13 @@ std::string Menu::mouseHandler(float mouseX, float mouseY, eventType event) {
 
   if (event == MOUSE_CLICK) {
     std::string clickedButton = handleButtonClick(mouseX, mouseY);
-    std::cout << _toUpdate << std::endl;
+    std::cout << clickedButton << std::endl;
     _window->setButtonTextureDirty(_toUpdate);
     if (clickedButton == "Hoster") {
       return "Hoster";
+    }
+    if (clickedButton == "Rejoindre la partie") {
+      return "Rejoindre la partie";
     }
     for (auto &dropdown : _window->getDropdowns()) {
       if (dropdown->isClicked(mouseX, mouseY)) {
@@ -267,9 +291,26 @@ Menu::loop(eventType event,
     if (button == "Hoster") {
       _window->deleteTexts();
       _window->deleteButtons();
+      _window->deleteInputTexts();
       _params->ip = "127.0.0.1";
-      _params->spaceshipId = 1;
-      _params->bulletId = 1;
+      std::size_t spaceId = std::stoi(_selectedSpaceship.substr(9));
+      _params->spaceshipId = spaceId;
+      std::size_t weaponId = std::stoi(_selectedWeapon.substr(6));
+      _params->bulletId = weaponId;
+      return sceneType::LOBBY;
+    }
+  }
+
+  if (_selectedSpaceship != "" && _selectedWeapon != "") {
+    if (button == "Rejoindre la partie") {
+      _window->deleteTexts();
+      _window->deleteButtons();
+      _params->ip = _window->getInputTextValue("Rejoindre_window");
+      _window->deleteInputTexts();
+      std::size_t spaceId = std::stoi(_selectedSpaceship.substr(9));
+      _params->spaceshipId = spaceId;
+      std::size_t weaponId = std::stoi(_selectedWeapon.substr(6));
+      _params->bulletId = weaponId;
       return sceneType::LOBBY;
     }
   }
