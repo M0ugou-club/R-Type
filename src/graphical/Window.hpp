@@ -55,7 +55,8 @@ public:
 
   void addButton(float x, float y, float w, float h,
                  const char *normalSpritePath, const char *hoverSpritePath,
-                 const std::string &text, const std::string &tag = "");
+                 const char *selectedSpritePath, const std::string &text,
+                 const std::string &tag = "");
 
   void addDropdown(float x, float y, float width, float height,
                    std::vector<std::string> options, std::string tag);
@@ -122,13 +123,17 @@ public:
 
   std::vector<InputText> &getInputTexts() { return _inputTexts; }
 
-  std::string getInputTextValue(const std::string &tag);
+  std::string getInputTextValue(const std::string &placeholder);
 
   void setWindowSize(int width, int height);
 
   int getWindowWidth() { return _windowWidth; }
 
   int getWindowHeight() { return _windowHeight; }
+
+  void setSelectedButton(std::string text);
+
+  void unSelectButton(std::string tag);
 
 private:
   SDL_Window *_window;

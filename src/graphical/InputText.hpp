@@ -31,6 +31,9 @@ public:
   const std::string &getText() const;
   void setText(const std::string &text);
   const std::string &getTag() const;
+  const std::string &getPlaceholder() {
+    return _placeholder;
+  };
   bool isSelected() const { return _isSelected; };
   std::string getNumber(keyType key);
 
@@ -42,4 +45,5 @@ private:
   std::string _currentText;
   SDL_Renderer *_renderer;
   Text _text;
+  std::string _placeholder;
 };

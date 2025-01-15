@@ -22,10 +22,12 @@ Button::Button(float x, float y, float w, float h, SDL_Renderer *renderer,
 
 Button::Button(float x, float y, float w, float h, SDL_Renderer *renderer,
                const char *normalSpritePath, const char *hoverSpritePath,
-               const std::string &text, const std::string &tag)
+               const char *selectedSpritePath, const std::string &text,
+               const std::string &tag)
     : _renderer(renderer), _rect(new SDL_FRect{x, y, w, h}), _tag(tag),
       _useTextures(true), _textButton(text),
       _normalSpritePath(normalSpritePath), _hoverSpritePath(hoverSpritePath),
+      _selectedSpritePath(selectedSpritePath),
       _text(text, x, y, w, h, renderer, 40,
             "../src/graphical/assets/RTypefont.otf", {255, 255, 255, 255}) {
   _text.init();
@@ -60,6 +62,7 @@ void Button::drawButton() {
     if (!_normalTexture || !_hoverTexture || _texturesDirty) {
       _normalTexture = IMG_LoadTexture(_renderer, _normalSpritePath);
       _hoverTexture = IMG_LoadTexture(_renderer, _hoverSpritePath);
+      _selectedTexture = IMG_LoadTexture(_renderer, _selectedSpritePath);
       _texturesDirty = false;
       if (!_normalTexture || !_hoverTexture) {
         std::cerr << "Failed to reload textures for button: " << _tag
@@ -71,6 +74,9 @@ void Button::drawButton() {
 
     if (isMouseOver() && _normalTexture) {
       currentTexture = _normalTexture;
+    }
+    if (_selected) {
+      currentTexture = _selectedTexture;
     }
     if (currentTexture) {
       SDL_RenderTexture(_renderer, currentTexture, nullptr, _rect);
@@ -105,6 +111,7 @@ void Button::init() {
   if (_useTextures) {
     _normalTexture = IMG_LoadTexture(_renderer, _normalSpritePath);
     _hoverTexture = IMG_LoadTexture(_renderer, _hoverSpritePath);
+    _selectedTexture = IMG_LoadTexture(_renderer, _selectedSpritePath);
   }
 }
 

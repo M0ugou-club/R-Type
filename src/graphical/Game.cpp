@@ -134,6 +134,9 @@ void Game::game(std::string nickname) {
     event = _window->updateEvents();
     _window->clear();
     auto switchScene = _scenes[_currentScene]->loop(event, next);
+    if (switchScene == sceneType::QUIT) {
+      break;
+    }
     if (now > next)
       next += std::chrono::milliseconds(25);
     if (switchScene != sceneType::NO_SWITCH) {

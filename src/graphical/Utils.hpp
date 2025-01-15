@@ -21,6 +21,7 @@ enum sceneType {
   ONE_VS_ONE,
   LOBBY,
   NO_SWITCH,
+  QUIT,
 };
 
 enum keyType {

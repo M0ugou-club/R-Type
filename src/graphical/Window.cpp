@@ -52,6 +52,7 @@ void Window::init() {
     destroyWindow();
     exit(84);
   }
+  SDL_StartTextInput(_window);
 }
 
 void Window::destroyWindow() {
@@ -196,37 +197,53 @@ keyType Window::catchKeyOnce() {
 std::vector<keyType> Window::catchKey() {
   const bool *keyState = SDL_GetKeyboardState(NULL);
   std::vector<keyType> keys;
+  static const std::unordered_map<SDL_Scancode, keyType> keyMap = {
+      {SDL_SCANCODE_ESCAPE, ESCAPE},
+      {SDL_SCANCODE_SPACE, SPACE},
+      {SDL_SCANCODE_RETURN, ENTER},
+      {SDL_SCANCODE_BACKSPACE, BACKSPACE},
+      {SDL_SCANCODE_PERIOD, PERIOD},
+      {SDL_SCANCODE_1, ONE},
+      {SDL_SCANCODE_2, TWO},
+      {SDL_SCANCODE_3, THREE},
+      {SDL_SCANCODE_4, FOUR},
+      {SDL_SCANCODE_5, FIVE},
+      {SDL_SCANCODE_6, SIX},
+      {SDL_SCANCODE_7, SEVEN},
+      {SDL_SCANCODE_8, EIGHT},
+      {SDL_SCANCODE_9, NINE},
+      {SDL_SCANCODE_0, ZERO},
+      {SDL_SCANCODE_A, Q},
+      {SDL_SCANCODE_B, B},
+      {SDL_SCANCODE_C, C},
+      {SDL_SCANCODE_D, D},
+      {SDL_SCANCODE_E, E},
+      {SDL_SCANCODE_F, F},
+      {SDL_SCANCODE_G, G},
+      {SDL_SCANCODE_H, H},
+      {SDL_SCANCODE_I, I},
+      {SDL_SCANCODE_J, J},
+      {SDL_SCANCODE_K, K},
+      {SDL_SCANCODE_L, L},
+      {SDL_SCANCODE_SEMICOLON, M},
+      {SDL_SCANCODE_N, N},
+      {SDL_SCANCODE_O, O},
+      {SDL_SCANCODE_P, P},
+      {SDL_SCANCODE_Q, A},
+      {SDL_SCANCODE_R, R},
+      {SDL_SCANCODE_S, S},
+      {SDL_SCANCODE_T, T},
+      {SDL_SCANCODE_U, U},
+      {SDL_SCANCODE_V, V},
+      {SDL_SCANCODE_W, Z},
+      {SDL_SCANCODE_X, X},
+      {SDL_SCANCODE_Y, Y},
+      {SDL_SCANCODE_Z, W}};
 
-  if (keyState[SDL_SCANCODE_ESCAPE]) {
-    ESCAPE;
-  } else if (keyState[SDL_SCANCODE_SPACE]) {
-    keys.push_back(SPACE);
-  } else if (keyState[SDL_SCANCODE_RETURN]) {
-    keys.push_back(ENTER);
-  } else if (keyState[SDL_SCANCODE_BACKSPACE]) {
-    keys.push_back(BACKSPACE);
-  } else if (keyState[SDL_SCANCODE_PERIOD]) {
-    keys.push_back(PERIOD);
-  } else if (keyState[SDL_SCANCODE_1]) {
-    keys.push_back(ONE);
-  } else if (keyState[SDL_SCANCODE_2]) {
-    keys.push_back(TWO);
-  } else if (keyState[SDL_SCANCODE_3]) {
-    keys.push_back(THREE);
-  } else if (keyState[SDL_SCANCODE_4]) {
-    keys.push_back(FOUR);
-  } else if (keyState[SDL_SCANCODE_5]) {
-    keys.push_back(FIVE);
-  } else if (keyState[SDL_SCANCODE_6]) {
-    keys.push_back(SIX);
-  } else if (keyState[SDL_SCANCODE_7]) {
-    keys.push_back(SEVEN);
-  } else if (keyState[SDL_SCANCODE_8]) {
-    keys.push_back(EIGHT);
-  } else if (keyState[SDL_SCANCODE_9]) {
-    keys.push_back(NINE);
-  } else if (keyState[SDL_SCANCODE_0]) {
-    keys.push_back(ZERO);
+  for (const auto &[scancode, key] : keyMap) {
+    if (keyState[scancode]) {
+      keys.push_back(key);
+    }
   }
 
   if (keys.empty())
@@ -330,10 +347,11 @@ void Window::handleInputTextEvent(float mouseX, float mouseY, eventType event) {
 
 void Window::addButton(float x, float y, float w, float h,
                        const char *normalSpritePath,
-                       const char *hoverSpritePath, const std::string &text,
+                       const char *hoverSpritePath,
+                       const char *selectedSpritePath, const std::string &text,
                        const std::string &tag) {
   _buttons.emplace_back(x, y, w, h, _renderer, normalSpritePath,
-                        hoverSpritePath, text, tag);
+                        hoverSpritePath, selectedSpritePath, text, tag);
   _buttons.back().init();
 }
 
@@ -351,11 +369,29 @@ void Window::setWindowSize(int width, int height) {
   _windowHeight = height;
 }
 
-std::string Window::getInputTextValue(const std::string &tag) {
+std::string Window::getInputTextValue(const std::string &placeholder) {
   for (auto &input : _inputTexts) {
-    if (input.getTag() == tag) {
+    if (input.getPlaceholder() == placeholder) {
       return input.getText();
     }
   }
   return "";
+}
+
+void Window::setSelectedButton(std::string text) {
+  for (auto &button : _buttons) {
+    if (button.getText() == text) {
+      std::cout << text << std::endl;
+      button.setSelected(true);
+    }
+  }
+}
+
+void Window::unSelectButton(std::string tag) {
+  for (auto &button : _buttons) {
+    if (button.getText() == tag) {
+      std::cout << tag << std::endl;
+      button.setSelected(false);
+    }
+  }
 }

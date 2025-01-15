@@ -14,7 +14,7 @@ InputText::InputText(float x, float y, float width, float height,
                      SDL_Color color, const std::string &tag,
                      const std::string &placeholder)
     : _x(x), _y(y), _width(width), _height(height), _renderer(renderer),
-      _tag(tag), _isSelected(false),
+      _tag(tag), _isSelected(false), _placeholder(placeholder),
       _text(placeholder, x, y, width, height, renderer, 40, fontPath, color) {
   _rect = {static_cast<float>(x), static_cast<float>(y), width, height};
   _currentText = placeholder;
@@ -63,30 +63,54 @@ void InputText::setText(const std::string &text) {
 const std::string &InputText::getTag() const { return _tag; }
 
 std::string InputText::getNumber(keyType key) {
-  switch (key) {
-  case keyType::ZERO:
-    return "0";
-  case keyType::ONE:
-    return "1";
-  case keyType::TWO:
-    return "2";
-  case keyType::THREE:
-    return "3";
-  case keyType::FOUR:
-    return "4";
-  case keyType::FIVE:
-    return "5";
-  case keyType::SIX:
-    return "6";
-  case keyType::SEVEN:
-    return "7";
-  case keyType::EIGHT:
-    return "8";
-  case keyType::NINE:
-    return "9";
-  case keyType::PERIOD:
-    return ".";
-  default:
-    return "";
-  }
+  static const std::unordered_map<keyType, std::string> keyMap = {
+      {keyType::ZERO, "0"},
+      {keyType::ONE, "1"},
+      {keyType::TWO, "2"},
+      {keyType::THREE, "3"},
+      {keyType::FOUR, "4"},
+      {keyType::FIVE, "5"},
+      {keyType::SIX, "6"},
+      {keyType::SEVEN, "7"},
+      {keyType::EIGHT, "8"},
+      {keyType::NINE, "9"},
+      {keyType::PERIOD, "."},
+      {keyType::UP, "Up"},
+      {keyType::DOWN, "Down"},
+      {keyType::LEFT, "Left"},
+      {keyType::RIGHT, "Right"},
+      {keyType::SPACE, "Space"},
+      {keyType::ENTER, "Enter"},
+      {keyType::ESCAPE, "Escape"},
+      {keyType::BACKSPACE, "Backspace"},
+      {keyType::A, "A"},
+      {keyType::B, "B"},
+      {keyType::C, "C"},
+      {keyType::D, "D"},
+      {keyType::E, "E"},
+      {keyType::F, "F"},
+      {keyType::G, "G"},
+      {keyType::H, "H"},
+      {keyType::I, "I"},
+      {keyType::J, "J"},
+      {keyType::K, "K"},
+      {keyType::L, "L"},
+      {keyType::M, "M"},
+      {keyType::N, "N"},
+      {keyType::O, "O"},
+      {keyType::P, "P"},
+      {keyType::Q, "Q"},
+      {keyType::R, "R"},
+      {keyType::S, "S"},
+      {keyType::T, "T"},
+      {keyType::U, "U"},
+      {keyType::V, "V"},
+      {keyType::W, "W"},
+      {keyType::X, "X"},
+      {keyType::Y, "Y"},
+      {keyType::Z, "Z"},
+      {keyType::NONE, ""}};
+
+  auto it = keyMap.find(key);
+  return it != keyMap.end() ? it->second : "";
 }

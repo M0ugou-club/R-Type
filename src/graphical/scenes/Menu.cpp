@@ -77,13 +77,17 @@ void Menu::setMenu(const std::string &selectedMenu) {
 
   if (selectedMenu == "spaceship1" || selectedMenu == "spaceship2" ||
       selectedMenu == "spaceship3" || selectedMenu == "spaceship4") {
+    _window->unSelectButton(_selectedSpaceship);
     _selectedSpaceship = selectedMenu;
+    _window->setSelectedButton(selectedMenu);
     return;
   }
 
   if (selectedMenu == "weapon1" || selectedMenu == "weapon2" ||
       selectedMenu == "weapon3" || selectedMenu == "weapon4") {
+    _window->unSelectButton(_selectedWeapon);
     _selectedWeapon = selectedMenu;
+    _window->setSelectedButton(selectedMenu);
     return;
   }
 
@@ -111,6 +115,7 @@ void Menu::setMenu(const std::string &selectedMenu) {
     init();
     _window->deleteText(_menuTitle);
     setupSettingsMenu();
+    _window->setSelectedButton(selectedMenu);
     return;
   }
 
@@ -165,6 +170,11 @@ void Menu::setupHostMenu() {
                        static_cast<int>(0.355 * _windowHeight), 500, 50,
                        {"Duel", "Histoire", "EndLess"}, "Heberger_window");
 
+  _window->addInputText(static_cast<int>(0.7 * _windowWidth),
+                        static_cast<int>(0.355 * _windowHeight), 300, 50,
+                        "../src/graphical/assets/RTypefont.otf",
+                        {255, 255, 255, 255}, "Heberger_window", "PSEUDO");
+
   addSpaceshipSelection("Heberger");
 }
 
@@ -186,6 +196,11 @@ void Menu::setupJoinMenu() {
                      "Rejoindre la partie", "Rejoindre_window",
                      {37, 37, 37, 70}, {37, 37, 37, 200}, {255, 255, 255, 255},
                      {255, 255, 255, 255});
+
+  _window->addInputText(static_cast<int>(0.7 * _windowWidth),
+                        static_cast<int>(0.355 * _windowHeight), 300, 50,
+                        "../src/graphical/assets/RTypefont.otf",
+                        {255, 255, 255, 255}, "Rejoindre_window", "PSEUDO");
 
   addSpaceshipSelection("Rejoindre");
 }
@@ -220,45 +235,53 @@ void Menu::addSpaceshipSelection(std::string window) {
   std::string menu_window = window + "_window";
   _window->addButton(static_cast<int>(0.38 * _windowWidth),
                      static_cast<int>(0.585 * _windowHeight), 147, 93,
+                     "../src/graphical/assets/weapon1_hover.png",
                      "../src/graphical/assets/weapon1.png",
-                     "../src/graphical/assets/weapon1.png", "weapon1",
+                     "../src/graphical/assets/weapon1_selected.png", "weapon1",
                      menu_window);
   _window->addButton(static_cast<int>(0.476 * _windowWidth),
                      static_cast<int>(0.585 * _windowHeight), 147, 93,
+                     "../src/graphical/assets/weapon2_hover.png",
                      "../src/graphical/assets/weapon2.png",
-                     "../src/graphical/assets/weapon2.png", "weapon2",
+                     "../src/graphical/assets/weapon2_selected.png", "weapon2",
                      menu_window);
   _window->addButton(static_cast<int>(0.572 * _windowWidth),
                      static_cast<int>(0.585 * _windowHeight), 147, 93,
+                     "../src/graphical/assets/weapon3_hover.png",
                      "../src/graphical/assets/weapon3.png",
-                     "../src/graphical/assets/weapon3.png", "weapon3",
+                     "../src/graphical/assets/weapon3_selected.png", "weapon3",
                      menu_window);
   _window->addButton(static_cast<int>(0.67 * _windowWidth),
                      static_cast<int>(0.585 * _windowHeight), 147, 93,
+                     "../src/graphical/assets/weapon4_hover.png",
                      "../src/graphical/assets/weapon4.png",
-                     "../src/graphical/assets/weapon4.png", "weapon4",
+                     "../src/graphical/assets/weapon4_selected.png", "weapon4",
                      menu_window);
   _window->addButton(static_cast<int>(0.38 * _windowWidth),
                      static_cast<int>(0.444 * _windowHeight), 147, 93,
+                     "../src/graphical/assets/spaceship1.png",
                      "../src/graphical/assets/spaceship1_hover.png",
-                     "../src/graphical/assets/spaceship1.png", "spaceship1",
-                     menu_window);
+                     "../src/graphical/assets/spaceship1_selected.png",
+                     "spaceship1", menu_window);
   _window->addButton(static_cast<int>(0.476 * _windowWidth),
                      static_cast<int>(0.444 * _windowHeight), 147, 93,
-                     "../src/graphical/assets/spaceship2.png",
                      "../src/graphical/assets/spaceship2_hover.png",
+                     "../src/graphical/assets/spaceship2.png",
+                     "../src/graphical/assets/spaceship2_selected.png",
                      "spaceship2", menu_window);
   _window->addButton(static_cast<int>(0.572 * _windowWidth),
                      static_cast<int>(0.444 * _windowHeight), 147, 93,
-                     "../src/graphical/assets/spaceship3.png",
                      "../src/graphical/assets/spaceship3_hover.png",
+                     "../src/graphical/assets/spaceship3.png",
+                     "../src/graphical/assets/spaceship3_selected.png",
                      "spaceship3", menu_window);
 
   _window->addButton(static_cast<int>(0.67 * _windowWidth),
                      static_cast<int>(0.444 * _windowHeight), 147, 93,
+                     "../src/graphical/assets/spaceship4_hover.png",
                      "../src/graphical/assets/spaceship4.png",
-                     "../src/graphical/assets/spaceship4.png", "spaceship4",
-                     menu_window);
+                     "../src/graphical/assets/spaceship4_selected.png",
+                     "spaceship4", menu_window);
 }
 
 std::string Menu::handleButtonClick(float mouseX, float mouseY) {
@@ -280,12 +303,14 @@ std::string Menu::mouseHandler(float mouseX, float mouseY, eventType event) {
   if (event == MOUSE_CLICK) {
     std::string clickedButton = handleButtonClick(mouseX, mouseY);
     _window->setButtonTextureDirty(_toUpdate);
-    if (clickedButton == "Hoster") {
+    if (clickedButton == "Hoster")
       return "Hoster";
-    }
-    if (clickedButton == "Rejoindre la partie") {
+
+    if (clickedButton == "Rejoindre la partie")
       return "Rejoindre la partie";
-    }
+
+    if (clickedButton == "Quitter")
+      return "Quitter";
     for (auto &dropdown : _window->getDropdowns()) {
       if (dropdown->isClicked(mouseX, mouseY)) {
         dropdown->toggleOpen();
@@ -353,6 +378,8 @@ Menu::loop(eventType event,
       _window->deleteButtons();
       _window->deleteInputTexts();
       _params->ip = "127.0.0.1";
+      std::string pseudo = _window->getInputTextValue("PSEUDO");
+      std::cout << "Pseudo: " << pseudo << std::endl;
       std::size_t spaceId = std::stoi(_selectedSpaceship.substr(9));
       _params->spaceshipId = spaceId;
       std::size_t weaponId = std::stoi(_selectedWeapon.substr(6));
@@ -365,7 +392,9 @@ Menu::loop(eventType event,
     if (button == "Rejoindre la partie") {
       _window->deleteTexts();
       _window->deleteButtons();
-      _params->ip = _window->getInputTextValue("Rejoindre_window");
+      _params->ip = _window->getInputTextValue("127.0.0.1");
+      std::string pseudo = _window->getInputTextValue("PSEUDO");
+      std::cout << "Pseudo: " << pseudo << std::endl;
       _window->deleteInputTexts();
       std::size_t spaceId = std::stoi(_selectedSpaceship.substr(9));
       _params->spaceshipId = spaceId;
@@ -373,6 +402,13 @@ Menu::loop(eventType event,
       _params->bulletId = weaponId;
       return sceneType::LOBBY;
     }
+  }
+
+  if (button == "Quitter") {
+    _window->deleteTexts();
+    _window->deleteButtons();
+    _window->deletedropdowns();
+    return sceneType::QUIT;
   }
 
   _window->drawBackground();
@@ -393,12 +429,6 @@ Menu::loop(eventType event,
 
   _window->drawInputTexts();
   _window->handleInputTextEvent(mouseX, mouseY, event);
-
-  if (button == "Quitter") {
-    _window->deleteTexts();
-    _window->deleteButtons();
-    return sceneType::LOBBY;
-  }
 
   return sceneType::NO_SWITCH;
 }

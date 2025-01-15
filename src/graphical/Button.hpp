@@ -25,7 +25,8 @@ public:
 
   Button(float x, float y, float w, float h, SDL_Renderer *renderer,
          const char *normalSpritePath, const char *hoverSpritePath,
-         const std::string &text, const std::string &tag = "");
+         const char *_selectedSpritePath, const std::string &text,
+         const std::string &tag = "");
 
   ~Button();
 
@@ -45,6 +46,8 @@ public:
 
   SDL_FRect *getRect() { return _rect; }
 
+  void setSelected(bool selected) { _selected = selected; }
+
   void markTexturesDirty();
 
 private:
@@ -58,6 +61,7 @@ private:
 
   const char *_normalSpritePath;
   const char *_hoverSpritePath;
+  const char *_selectedSpritePath;
 
   SDL_Color _normalColor;
   SDL_Color _hoverColor;
@@ -66,7 +70,12 @@ private:
 
   SDL_Texture *_normalTexture;
   SDL_Texture *_hoverTexture;
+  SDL_Texture *_selectedTexture;
+
   bool _useTextures = false;
 
   bool _texturesDirty = false;
+
+  bool _selected = false;
+  SDL_FRect *_outlinerect;
 };
