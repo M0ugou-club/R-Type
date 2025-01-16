@@ -287,6 +287,9 @@ std::string Menu::mouseHandler(float mouseX, float mouseY, eventType event) {
 
   if (event == MOUSE_CLICK) {
     std::string clickedButton = handleButtonClick(mouseX, mouseY);
+    if (clickedButton == "" && !_windowOpen) {
+      return "";
+    }
     _window->setButtonTextureDirty(_toUpdate);
     _window->deleteText(_menuTitle);
     _window->addText(_menuTitle, static_cast<int>(0.367 * _windowWidth),
