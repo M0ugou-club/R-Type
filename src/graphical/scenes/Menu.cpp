@@ -75,6 +75,8 @@ void Menu::setupHostMenu() {
   _windowOpen = true;
   _menuTitle = "Crée une partie";
 
+  addSpaceshipSelection("Heberger");
+
   _window->addText(_menuTitle, static_cast<int>(0.367 * _windowWidth),
                    static_cast<int>(0.282 * _windowHeight), 500, 50, 37,
                    "../src/graphical/assets/RTypefont.otf", {0, 0, 0, 0});
@@ -92,13 +94,18 @@ void Menu::setupHostMenu() {
                         static_cast<int>(0.355 * _windowHeight), 260, 50,
                         "../src/graphical/assets/RTypefont.otf",
                         {255, 255, 255, 255}, "Heberger_window", "PSEUDO");
-
-  addSpaceshipSelection("Heberger");
 }
 
 void Menu::setupJoinMenu() {
   _windowOpen = true;
   _menuTitle = "Rejoindre une partie";
+  addSpaceshipSelection("Rejoindre");
+
+  _window->addButton(static_cast<int>(0.358 * _windowWidth),
+                     static_cast<int>(0.72 * _windowHeight), 670, 50,
+                     "Rejoindre la partie", "Rejoindre_window",
+                     {37, 37, 37, 70}, {37, 37, 37, 200}, {255, 255, 255, 255},
+                     {255, 255, 255, 255});
 
   _window->addText(_menuTitle, static_cast<int>(0.367 * _windowWidth),
                    static_cast<int>(0.282 * _windowHeight), 500, 50, 37,
@@ -109,18 +116,10 @@ void Menu::setupJoinMenu() {
                         "../src/graphical/assets/RTypefont.otf",
                         {255, 255, 255, 255}, "Rejoindre_window", "127.0.0.1");
 
-  _window->addButton(static_cast<int>(0.358 * _windowWidth),
-                     static_cast<int>(0.72 * _windowHeight), 670, 50,
-                     "Rejoindre la partie", "Rejoindre_window",
-                     {37, 37, 37, 70}, {37, 37, 37, 200}, {255, 255, 255, 255},
-                     {255, 255, 255, 255});
-
   _window->addInputText(static_cast<int>(0.7 * _windowWidth),
                         static_cast<int>(0.355 * _windowHeight), 260, 50,
                         "../src/graphical/assets/RTypefont.otf",
                         {255, 255, 255, 255}, "Rejoindre_window", "PSEUDO");
-
-  addSpaceshipSelection("Rejoindre");
 }
 
 void Menu::setupSettingsMenu() {
@@ -289,6 +288,10 @@ std::string Menu::mouseHandler(float mouseX, float mouseY, eventType event) {
   if (event == MOUSE_CLICK) {
     std::string clickedButton = handleButtonClick(mouseX, mouseY);
     _window->setButtonTextureDirty(_toUpdate);
+    _window->deleteText(_menuTitle);
+    _window->addText(_menuTitle, static_cast<int>(0.367 * _windowWidth),
+                     static_cast<int>(0.282 * _windowHeight), 500, 50, 37,
+                     "../src/graphical/assets/RTypefont.otf", {0, 0, 0, 0});
     return processMouseClick(clickedButton, mouseX, mouseY);
   }
 
