@@ -6,8 +6,8 @@
 */
 
 #pragma once
-#include <iostream>
 #include <SDL3/SDL.h>
+#include <iostream>
 
 struct Nickname {
   std::string nickname;

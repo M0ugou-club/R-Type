@@ -9,8 +9,8 @@
 
 #include "Button.hpp"
 #include "Dropdown.hpp"
-#include "Sound.hpp"
 #include "InputText.hpp"
+#include "Sound.hpp"
 #include "Text.hpp"
 #include "Utils.hpp"
 #include <SDL3/SDL.h>
@@ -83,7 +83,7 @@ public:
 
   void moveBackground();
 
-  std::vector<keyType>  catchKey();
+  std::vector<keyType> catchKey();
 
   std::vector<keyType> catchMovementKey();
 

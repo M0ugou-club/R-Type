@@ -28,7 +28,6 @@ public:
 
   void setMenu(const std::string &selectedButton);
 
-
   void setupHostMenu();
 
   void setupJoinMenu();
