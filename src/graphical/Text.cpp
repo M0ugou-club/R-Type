@@ -82,3 +82,16 @@ void Text::setPos(float x, float y) {
   _texture = SDL_CreateTextureFromSurface(_renderer, surface);
   SDL_DestroySurface(surface);
 }
+
+void Text::setText(std::string text) {
+  _text = text;
+  if (_texture) {
+    SDL_DestroyTexture(_texture);
+    _texture = nullptr;
+  }
+
+  SDL_Surface *surface =
+      TTF_RenderText_Blended(_font, (_text).c_str(), (_text).length(), _color);
+  _texture = SDL_CreateTextureFromSurface(_renderer, surface);
+  SDL_DestroySurface(surface);
+}
