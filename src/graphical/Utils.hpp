@@ -80,4 +80,15 @@ struct ChoosingParams {
   std::string ip;
   int spaceshipId;
   int bulletId;
+  std::string nickname;
+};
+
+enum soundType {
+  BULLET_SOUND,
+  ENDLESS_MUSIC,
+  MICHOU_ET_ELSA_2,
+  WAVE1,
+  WAVE2,
+  WAVE3,
+  NEWWAVE,
 };

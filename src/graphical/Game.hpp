@@ -43,6 +43,7 @@ public:
     _ecs->register_component<AiType>();
     _ecs->register_component<Nickname>();
     _ecs->register_component<Property>();
+    _ecs->register_component<LifeBar>();
   };
 
   void loadScene(sceneType sceneName);
@@ -50,8 +51,8 @@ public:
 
   void listen(IClient &protocol);
 
-  void init(std::string nickname, ChoosingParams *params);
-  void game(std::string nickname);
+  void init(ChoosingParams *params);
+  void game();
 
 private:
   std::map<sceneType, std::shared_ptr<IScene>> _scenes;

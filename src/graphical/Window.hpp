@@ -9,6 +9,7 @@
 
 #include "Button.hpp"
 #include "Dropdown.hpp"
+#include "Sound.hpp"
 #include "InputText.hpp"
 #include "Text.hpp"
 #include "Utils.hpp"
@@ -32,6 +33,11 @@ public:
   void destroyWindow();
 
   SDL_Texture *loadTexture(const char *path);
+
+  SDL_Texture *loadText(std::string text, int size, std::string fontPath,
+                        SDL_Color color);
+
+  void drawRect(SDL_FRect rect, SDL_Color color);
 
   void draw(SDL_Texture *texture, SDL_Rect rect);
 
@@ -75,7 +81,9 @@ public:
 
   void drawBackground();
 
-  std::vector<keyType> catchKey();
+  void moveBackground();
+
+  std::vector<keyType>  catchKey();
 
   std::vector<keyType> catchMovementKey();
 
@@ -102,6 +110,20 @@ public:
   void setAllowToInteract(bool allow) { _allowToInteract = allow; }
 
   bool getAllowToInteract() { return _allowToInteract; }
+
+  void playSound(soundType type, int loop);
+
+  void addSound(std::string soundPath, soundType type, int volume);
+
+  void stopAllSound();
+
+  void stopSound(soundType type);
+
+  bool isBackgroundScrolling() { return _isBackgroundScrolling; }
+
+  void setBackgroundScrolling(bool scrolling) {
+    _isBackgroundScrolling = scrolling;
+  }
 
   void addInputText(float x, float y, float width, float height,
                     const std::string &fontPath, SDL_Color color,
@@ -140,11 +162,16 @@ private:
   SDL_Renderer *_renderer;
   SDL_Event _event;
   SDL_Texture *_background;
+  SDL_Texture *_background2;
   std::vector<Text> _texts;
   std::vector<Button> _buttons;
   std::vector<std::unique_ptr<Dropdown>> _dropdowns;
+  std::vector<std::unique_ptr<Sound>> _sounds;
   std::vector<InputText> _inputTexts;
   bool _allowToInteract;
+  float _bgOffset = 0;
+  float _bgScrollSpeed = 5.0f;
+  bool _isBackgroundScrolling = false;
   int _windowWidth;
   int _windowHeight;
 };

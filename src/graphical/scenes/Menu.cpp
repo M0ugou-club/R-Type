@@ -48,29 +48,7 @@ void Menu::init() {
             static_cast<int>(0.27 * _windowHeight), 887, 484},
            _window->loadTexture("../src/graphical/assets/CreateParty.svg")));
   _ecs->add_component<EntityType>(entitie, EntityType::Menu);
-
-  auto entitie2 = _ecs->spawn_entity();
-
-  _ecs->add_component<Position>(entitie2, Position(700, 300));
-  _ecs->add_component<Draw>(
-      entitie2,
-      Draw({255, 255, 255, 255},
-           {static_cast<int>(0.365 * _windowWidth),
-            static_cast<int>(0.43 * _windowHeight), 686, 117},
-           _window->loadTexture("../src/graphical/assets/dropshadow.svg")));
-  _ecs->add_component<EntityType>(entitie2, EntityType::Menu);
-
-  auto entitie3 = _ecs->spawn_entity();
-  _ecs->add_component<Position>(entitie3, Position(700, 300));
-  _ecs->add_component<Draw>(
-      entitie3,
-      Draw({255, 255, 255, 255},
-           {static_cast<int>(0.365 * _windowWidth),
-            static_cast<int>(0.57 * _windowHeight), 686, 117},
-           _window->loadTexture("../src/graphical/assets/dropshadow.svg")));
-  _ecs->add_component<EntityType>(entitie3, EntityType::Menu);
-
-  _window->startTextInput();
+  _window->playSound(MICHOU_ET_ELSA_2, 0);
 }
 
 void Menu::setMenu(const std::string &selectedMenu) {
@@ -379,7 +357,8 @@ Menu::loop(eventType event,
       _window->deleteInputTexts();
       _params->ip = "127.0.0.1";
       std::string pseudo = _window->getInputTextValue("PSEUDO");
-      std::cout << "Pseudo: " << pseudo << std::endl;
+      std::cout << " dans heberger Pseudo: " << pseudo << std::endl;
+      _params->nickname = pseudo;
       std::size_t spaceId = std::stoi(_selectedSpaceship.substr(9));
       _params->spaceshipId = spaceId;
       std::size_t weaponId = std::stoi(_selectedWeapon.substr(6));
