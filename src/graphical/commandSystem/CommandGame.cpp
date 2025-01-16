@@ -84,11 +84,15 @@ void CommandGame::executeCommandGame(Command command, Queue *queue,
 
 void CommandGame::connect(Command command, Queue *queue, Registry *ecs,
                           Window *window) {
+  auto &entityType = ecs->get_components<EntityType>();
   std::string texturePath = pathSpaceship[command.repConnect.spaceshipId];
 
   SDL_Texture *playerTexture = window->loadTexture(texturePath.c_str());
 
   int w = (int)(command.repConnect.Nickname.size() * 10);
+
+  std::cout << "Spaceship id : " << command.repConnect.spaceshipId << std::endl;
+  std::cout << "Shoot id : " << command.repConnect.shootId << std::endl;
 
   auto player = create_entity<EntityType::Player>(
       *ecs,
@@ -122,6 +126,7 @@ void CommandGame::move(Command command, Queue *queue, Registry *ecs,
   auto &entities = ecs->get_components<EntityType>();
   auto &positions = ecs->get_components<Position>();
   auto &draw = ecs->get_components<Draw>();
+  auto &aiType = ecs->get_components<AiType>();
 
   for (std::size_t i = 0; i < entities.size(); ++i) {
     if (i == command.move.entityId && positions[i].has_value()) {
@@ -158,6 +163,7 @@ void CommandGame::createEnemy(Command command, Queue *queue, Registry *ecs,
       window->loadTexture("../src/graphical/assets/enemy/enemy.png");
   AiType aiType = static_cast<AiType>(command.createEnemy.aiType);
 
+  std::cout << "[CREATE ENEMY COMMAND] entity id : " << command.createEnemy.enemyId << std::endl;
   auto enemy = create_entity<EntityType::Enemy>(
       *ecs,
       Position(command.createEnemy.positionX, command.createEnemy.positionY),

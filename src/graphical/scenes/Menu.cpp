@@ -407,11 +407,15 @@ sceneType Menu::processButtonActions(const std::string &button) {
 }
 
 void Menu::prepareLobby(const std::string &ip, const std::string &pseudo) {
+  auto &entityType = _ecs->get_components<EntityType>();
   _window->deleteTexts();
   _window->deleteButtons();
   _window->deleteInputTexts();
+  for (std::size_t i = 0; i < entityType.size(); ++i) {
+    _ecs->kill_entity(static_cast<Entities>(i));
+  }
   _params->ip = ip;
-  std::cout << "Pseudo: " << pseudo << std::endl;
+  _params->nickname = pseudo;
   std::size_t spaceId = std::stoi(_selectedSpaceship.substr(9));
   _params->spaceshipId = spaceId;
   std::size_t weaponId = std::stoi(_selectedWeapon.substr(6));

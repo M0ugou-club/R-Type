@@ -264,6 +264,7 @@ public:
           continue;
         }
       }
+      _entities.erase(it);
     }
   };
   ///@}

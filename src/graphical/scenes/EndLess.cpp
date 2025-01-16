@@ -16,6 +16,11 @@ EndLess::EndLess() {
 EndLess::~EndLess() {}
 
 void EndLess::init() {
+  auto &entityType = _ecs->get_components<EntityType>();
+
+  for (std::size_t i = 0; i < entityType.size(); i++) {
+    _ecs->kill_entity(Entities(i));
+  }
   _window->setBackground(
       _window->loadTexture("../src/graphical/assets/level1.png"));
   Command command;

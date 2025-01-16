@@ -75,6 +75,7 @@ struct ChoosingParams {
   std::string ip;
   int spaceshipId;
   int bulletId;
+  std::string nickname;
 };
 
 enum soundType {

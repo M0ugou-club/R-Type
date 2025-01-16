@@ -2,7 +2,7 @@
   "enemies": [
     {
       "type": "Pion",
-      "number": 10,
+      "number": 1,
       "ia": "Aggressive"
     },
     {

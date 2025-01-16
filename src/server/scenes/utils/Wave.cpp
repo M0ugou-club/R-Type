@@ -48,6 +48,7 @@ void Wave::factory_call(const json &enemy, Queue &queue) {
     auto it = type_map.find(enemy["type"]);
     if (it != type_map.end()) {
       auto id = it->second();
+      std::cout << "[create Enemy ] id : " << id << std::endl;
       Command command;
       command.type = CommandType::CREATEENEMY;
       command.createEnemy.enemyId = id;

@@ -180,7 +180,7 @@ void CommandGame::connectLobby(Command command, Queue *queue, Registry *ecs) {
       Nickname(command.connectLobby.Nickname, {0, 0, 0, 0}, nullptr),
       Property(command.connectLobby.spaceshipId, command.connectLobby.shootId,
                command.id));
-
+  
   Command newCmd;
   newCmd.type = CommandType::NEWPLAYERLOBBY;
   newCmd.newPlayerLobby.id = player;

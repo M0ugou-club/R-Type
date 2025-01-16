@@ -41,9 +41,7 @@ Lobby::loop(eventType event,
         }
       }
       for (std::size_t i = 0; i < entityType.size(); ++i) {
-        if (entityType[i].has_value()) {
-          _ecs->kill_entity(static_cast<Entities>(i));
-        }
+        _ecs->kill_entity(static_cast<Entities>(i));
       }
       _window->stopAllSound();
       return sceneType::ENDLESS;
@@ -57,7 +55,6 @@ Lobby::loop(eventType event,
       if (button.isClicked(mouseX, mouseY)) {
         if (button.getText() == "Start") {
           Command command;
-          std::cout << "Start game" << std::endl;
           command.type = CommandType::STARTGAME;
           _queue->pushTcpQueue(command);
         }
