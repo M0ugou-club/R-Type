@@ -9,6 +9,7 @@
 
 #include "Button.hpp"
 #include "Dropdown.hpp"
+#include "InputText.hpp"
 #include "Sound.hpp"
 #include "Text.hpp"
 #include "Utils.hpp"
@@ -57,6 +58,11 @@ public:
                  SDL_Color hoverColor = {255, 255, 255, 255},
                  SDL_Color normalTextColor = {255, 255, 255, 255},
                  SDL_Color hoverTextColor = {0, 0, 0, 0});
+
+  void addButton(float x, float y, float w, float h,
+                 const char *normalSpritePath, const char *hoverSpritePath,
+                 const char *selectedSpritePath, const std::string &text,
+                 const std::string &tag = "");
 
   void addDropdown(float x, float y, float width, float height,
                    std::vector<std::string> options, std::string tag);
@@ -119,6 +125,30 @@ public:
     _isBackgroundScrolling = scrolling;
   }
 
+  void addInputText(float x, float y, float width, float height,
+                    const std::string &fontPath, SDL_Color color,
+                    const std::string &tag, const std::string &placeholder);
+
+  void drawInputTexts();
+
+  void deleteInputTexts(const std::string &tag = "");
+
+  void deletedropdowns(const std::string &tag = "");
+
+  void setButtonTextureDirty(const std::string &tag = "");
+
+  std::vector<InputText> &getInputTexts() { return _inputTexts; }
+
+  std::string getInputTextValue(const std::string &placeholder);
+
+  int getWindowWidth() { return _windowWidth; }
+
+  int getWindowHeight() { return _windowHeight; }
+
+  void setSelectedButton(std::string text);
+
+  void unSelectButton(std::string tag);
+
 private:
   SDL_Window *_window;
   SDL_Renderer *_renderer;
@@ -129,6 +159,9 @@ private:
   std::vector<Button> _buttons;
   std::vector<std::unique_ptr<Dropdown>> _dropdowns;
   std::vector<std::unique_ptr<Sound>> _sounds;
+  std::vector<InputText> _inputTexts;
+  int _windowWidth;
+  int _windowHeight;
   bool _allowToInteract;
   float _bgOffset = 0;
   float _bgScrollSpeed = 5.0f;
