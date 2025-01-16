@@ -8,6 +8,7 @@
 #include "Window.hpp"
 #include <algorithm>
 #include <iostream>
+#include <unordered_map>
 #include <vector>
 
 Window::Window() { _allowToInteract = false; }
@@ -48,6 +49,9 @@ void Window::init() {
 
   int windowWidth = 1200;
   int windowHeight = 800;
+
+  _windowWidth = windowWidth;
+  _windowHeight = windowHeight;
 
   _window = SDL_CreateWindow("R-Type", windowWidth, windowHeight, 0);
   if (!_window) {
@@ -230,11 +234,55 @@ keyType Window::catchKeyOnce() {
 std::vector<keyType> Window::catchKey() {
   const bool *keyState = SDL_GetKeyboardState(NULL);
   std::vector<keyType> keys;
+  static const std::unordered_map<SDL_Scancode, keyType> keyMap = {
+      {SDL_SCANCODE_ESCAPE, ESCAPE},
+      {SDL_SCANCODE_SPACE, SPACE},
+      {SDL_SCANCODE_RETURN, ENTER},
+      {SDL_SCANCODE_BACKSPACE, BACKSPACE},
+      {SDL_SCANCODE_PERIOD, PERIOD},
+      {SDL_SCANCODE_1, ONE},
+      {SDL_SCANCODE_2, TWO},
+      {SDL_SCANCODE_3, THREE},
+      {SDL_SCANCODE_4, FOUR},
+      {SDL_SCANCODE_5, FIVE},
+      {SDL_SCANCODE_6, SIX},
+      {SDL_SCANCODE_7, SEVEN},
+      {SDL_SCANCODE_8, EIGHT},
+      {SDL_SCANCODE_9, NINE},
+      {SDL_SCANCODE_0, ZERO},
+      {SDL_SCANCODE_A, Q},
+      {SDL_SCANCODE_B, B},
+      {SDL_SCANCODE_C, C},
+      {SDL_SCANCODE_D, D},
+      {SDL_SCANCODE_E, E},
+      {SDL_SCANCODE_F, F},
+      {SDL_SCANCODE_G, G},
+      {SDL_SCANCODE_H, H},
+      {SDL_SCANCODE_I, I},
+      {SDL_SCANCODE_J, J},
+      {SDL_SCANCODE_K, K},
+      {SDL_SCANCODE_L, L},
+      {SDL_SCANCODE_SEMICOLON, M},
+      {SDL_SCANCODE_N, N},
+      {SDL_SCANCODE_O, O},
+      {SDL_SCANCODE_P, P},
+      {SDL_SCANCODE_Q, A},
+      {SDL_SCANCODE_R, R},
+      {SDL_SCANCODE_S, S},
+      {SDL_SCANCODE_T, T},
+      {SDL_SCANCODE_U, U},
+      {SDL_SCANCODE_V, V},
+      {SDL_SCANCODE_W, Z},
+      {SDL_SCANCODE_X, X},
+      {SDL_SCANCODE_Y, Y},
+      {SDL_SCANCODE_Z, W}};
 
-  if (keyState[SDL_SCANCODE_ESCAPE])
-    keys.push_back(ESCAPE);
-  if (keyState[SDL_SCANCODE_SPACE])
-    keys.push_back(SPACE);
+  for (const auto &[scancode, key] : keyMap) {
+    if (keyState[scancode]) {
+      keys.push_back(key);
+    }
+  }
+
   if (keys.empty())
     keys.push_back(NONE);
   return keys;
@@ -264,8 +312,8 @@ void Window::createMenuPipe() {
   SDL_Renderer *renderer = getRenderer();
   SDL_FRect pipeRect;
 
-  pipeRect.x = 45;
-  pipeRect.y = 275;
+  pipeRect.x = 0.02 * _windowWidth;
+  pipeRect.y = 0.2 * _windowHeight;
   pipeRect.w = 5;
   pipeRect.h = 400;
 
@@ -359,4 +407,90 @@ SDL_Texture *Window::loadText(std::string text, int size, std::string fontPath,
 void Window::drawRect(SDL_FRect rect, SDL_Color color) {
   SDL_SetRenderDrawColor(_renderer, color.r, color.g, color.b, color.a);
   SDL_RenderFillRect(_renderer, &rect);
+}
+
+void Window::deletedropdowns(const std::string &tag) {
+  if (tag.empty()) {
+    _dropdowns.clear();
+  } else {
+    _dropdowns.erase(std::remove_if(_dropdowns.begin(), _dropdowns.end(),
+                                    [&tag](const std::unique_ptr<Dropdown> &d) {
+                                      return d->getTag() == tag;
+                                    }),
+                     _dropdowns.end());
+  }
+}
+
+void Window::deleteInputTexts(const std::string &tag) {
+  if (tag.empty()) {
+    _inputTexts.clear();
+  } else {
+    _inputTexts.erase(std::remove_if(_inputTexts.begin(), _inputTexts.end(),
+                                     [&tag](const InputText &input) {
+                                       return input.getTag() == tag;
+                                     }),
+                      _inputTexts.end());
+  }
+}
+
+void Window::addInputText(float x, float y, float width, float height,
+                          const std::string &fontPath, SDL_Color color,
+                          const std::string &tag,
+                          const std::string &placeholder) {
+  InputText input = InputText(x, y, width, height, _renderer, fontPath, color,
+                              tag, placeholder);
+  input.init();
+
+  _inputTexts.push_back(input);
+}
+
+void Window::drawInputTexts() {
+  for (auto &input : _inputTexts) {
+    input.draw();
+  }
+}
+
+void Window::addButton(float x, float y, float w, float h,
+                       const char *normalSpritePath,
+                       const char *hoverSpritePath,
+                       const char *selectedSpritePath, const std::string &text,
+                       const std::string &tag) {
+  _buttons.emplace_back(x, y, w, h, _renderer, normalSpritePath,
+                        hoverSpritePath, selectedSpritePath, text, tag);
+  _buttons.back().init();
+}
+
+void Window::setButtonTextureDirty(const std::string &tag) {
+  for (auto &button : _buttons) {
+    if (button.getTag() == tag) {
+      button.markTexturesDirty();
+    }
+  }
+}
+
+std::string Window::getInputTextValue(const std::string &placeholder) {
+  for (auto &input : _inputTexts) {
+    if (input.getPlaceholder() == placeholder) {
+      return input.getText();
+    }
+  }
+  return "";
+}
+
+void Window::setSelectedButton(std::string text) {
+  for (auto &button : _buttons) {
+    if (button.getText() == text) {
+      std::cout << text << std::endl;
+      button.setSelected(true);
+    }
+  }
+}
+
+void Window::unSelectButton(std::string tag) {
+  for (auto &button : _buttons) {
+    if (button.getText() == tag) {
+      std::cout << tag << std::endl;
+      button.setSelected(false);
+    }
+  }
 }
