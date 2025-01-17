@@ -30,6 +30,7 @@ public:
   bool getIsOpen() { return _isOpen; };
   void moveButtonToTop();
   std::string getTag() { return _tag; };
+  std::string getSelectedOption() { return _selectedOption; };
 
 private:
   float _x, _y, _width, _height;

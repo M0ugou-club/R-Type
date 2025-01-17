@@ -69,6 +69,7 @@ void Menu::init() {
             static_cast<int>(0.57 * _windowHeight), 686, 117},
            _window->loadTexture("../src/graphical/assets/dropshadow.svg")));
   _ecs->add_component<EntityType>(entitie3, EntityType::Menu);
+  _window->playSound(MICHOU_ET_ELSA_2, -1);
 }
 
 void Menu::setupHostMenu() {

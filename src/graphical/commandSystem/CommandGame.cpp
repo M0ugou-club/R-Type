@@ -108,7 +108,8 @@ void CommandGame::connect(Command command, Queue *queue, Registry *ecs,
                window->loadText(command.repConnect.Nickname, 20,
                                 "../src/graphical/assets/RTypefont.otf",
                                 {255, 255, 255, 255})),
-      Property(command.repConnect.spaceshipId, command.repConnect.shootId, 0),
+      Property(command.repConnect.spaceshipId, command.repConnect.shootId, 0,
+               command.repConnect.playerNbr),
       std::optional<Control>(Control()),
       std::optional<std::size_t>(command.repConnect.id),
       std::optional<LifeBar>(
@@ -177,7 +178,12 @@ void CommandGame::createEnemy(Command command, Queue *queue, Registry *ecs,
 
 void CommandGame::newPlayer(Command command, Queue *queue, Registry *ecs,
                             Window *window) {
-  std::string texturePath = pathSpaceship[command.newPlayer.spaceshipId];
+  std::string texturePath;
+
+  if (command.newPlayer.playerNbr == 2) {
+    texturePath = "../src/graphical/assets/spaceship/inox_reverse.png";
+  } else
+    texturePath = pathSpaceship[command.newPlayer.spaceshipId];
 
   SDL_Texture *playerTexture = window->loadTexture(texturePath.c_str());
 
@@ -196,7 +202,8 @@ void CommandGame::newPlayer(Command command, Queue *queue, Registry *ecs,
                window->loadText(command.newPlayer.Nickname, 20,
                                 "../src/graphical/assets/RTypefont.otf",
                                 {255, 255, 255, 255})),
-      Property(command.newPlayer.spaceshipId, command.newPlayer.shootId, 0),
+      Property(command.newPlayer.spaceshipId, command.newPlayer.shootId, 0,
+               command.newPlayer.playerNbr),
       std::nullopt, std::optional<std::size_t>(command.newPlayer.id));
 }
 
@@ -217,7 +224,10 @@ void CommandGame::shoot(Command command, Queue *queue, Registry *ecs,
   }
 
   std::string texturePath = pathShoot[shootId];
-  std::size_t velocity = velocityShoot[shootId];
+  int velocity = (int)velocityShoot[shootId];
+  if (command.shoot.direction == 1) {
+    velocity = -velocity;
+  }
 
   SDL_Texture *shootTexture = window->loadTexture(texturePath.c_str());
 

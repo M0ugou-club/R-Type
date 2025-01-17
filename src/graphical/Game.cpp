@@ -86,6 +86,8 @@ void Game::init(ChoosingParams *params) {
   std::vector<uint8_t> connectLobby;
   connectLobby.push_back(0x06);
 
+  connectLobby.push_back(static_cast<uint8_t>(params->gamemode));
+
   connectLobby.push_back(static_cast<uint8_t>(params->spaceshipId - 1));
 
   connectLobby.push_back(static_cast<uint8_t>(params->bulletId - 1));
@@ -94,6 +96,11 @@ void Game::init(ChoosingParams *params) {
   for (size_t i = 0; i < params->nickname.size(); i++) {
     connectLobby.push_back(params->nickname[i]);
   }
+
+  std::cout << "[PARAMS]" << params->ip << std::endl;
+  std::cout << "[PARAMS]" << params->spaceshipId << std::endl;
+  std::cout << "[PARAMS]" << params->bulletId << std::endl;
+  std::cout << "[PARAMS] Gamemode : " << params->gamemode << std::endl;
 
   _tcp->sendToServer(connectLobby);
   _udp->sendToServer({0x03, '0', '.', '0', ' ', '0', '.', '0'});
@@ -108,7 +115,7 @@ void Game::init(ChoosingParams *params) {
 
 void Game::game() {
   std::chrono::time_point<std::chrono::steady_clock> next =
-      std::chrono::steady_clock::now() + std::chrono::milliseconds(100);
+      std::chrono::steady_clock::now() + std::chrono::milliseconds(25);
   bool running = true;
   eventType event = NO_EVENT;
   ChoosingParams *params = new ChoosingParams();
@@ -134,7 +141,7 @@ void Game::game() {
     if (now > next)
       next += std::chrono::milliseconds(25);
     if (switchScene != sceneType::NO_SWITCH) {
-      if (switchScene == LOBBY) {
+      if (switchScene == LOBBY || switchScene == LOBBY1V1) {
         init(params);
       }
       _currentScene = switchScene;

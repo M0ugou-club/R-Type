@@ -15,6 +15,7 @@ enum sceneType {
   ENDLESS,
   ONE_VS_ONE,
   LOBBY,
+  LOBBY1V1,
   QUIT,
   NO_SWITCH,
 };
@@ -75,6 +76,7 @@ struct ChoosingParams {
   std::string ip;
   int spaceshipId;
   int bulletId;
+  int gamemode;
   std::string nickname;
 };
 
@@ -86,4 +88,5 @@ enum soundType {
   WAVE2,
   WAVE3,
   NEWWAVE,
+  MICHOU_REMIX_WINTERZUUKO,
 };
