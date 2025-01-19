@@ -256,7 +256,7 @@ struct Position {
 
 int main() {
     Registry registry;
-    
+
     registry.register_component&lt;Position&gt;();
     registry.register_component&lt;Velocity&gt;();
     size_t entity = registry.create_entity();
@@ -284,9 +284,9 @@ struct Position {
 
 int main() {
     Registry registry;
-    
+
     registry.register_component&lt;Position&gt;();
-    
+
     size_t entity = registry.create_entity();
 
     registry.add_component&lt;Position&gt;(entity, {100, 200});
@@ -377,9 +377,9 @@ int main() {
     registry.add_component&lt;Position&gt;(entity, {50, 100});
 
     registry.kill_entity(entity);
-    
+
     registry.remove_component&lt;Position&gt;(entity);
-    
+
     std::cout &lt;&lt; "Entity and its components have been removed." &lt;&lt; std::endl;
 
     return 0;
@@ -393,7 +393,8 @@ Create entities using the registry.
 Add components to the entities.
 Use systems to define and execute the game logic.
 Access or modify components as needed during gameplay.
-Delete unused entities or components to maintain performance.</code></pre>
+Delete unused entities or components to maintain performance.
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div>
                     </main>
 
