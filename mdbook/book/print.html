@@ -222,6 +222,178 @@ Additionally, it can manage the lifecycle of all these elements.</p>
                                  |  ...                |
                                  +---------------------+
 </code></pre>
+<h3 id="code-implementation"><a class="header" href="#code-implementation">Code implementation</a></h3>
+<h4 id="1--creation-of-an-entity"><a class="header" href="#1--creation-of-an-entity">1 : Creation of an Entity</a></h4>
+<p>This is how you can create an entity.</p>
+<pre><code class="language-c++">#include "Registry.hpp"
+
+int main() {
+    Registry registry;
+
+    size_t entity = registry.create_entity();
+
+    std::cout &lt;&lt; "Entity created with ID: " &lt;&lt; entity &lt;&lt; std::endl;
+
+    return 0;
+}
+
+</code></pre>
+<h4 id="2--add-components-to-an-entity"><a class="header" href="#2--add-components-to-an-entity">2 : Add Components to an Entity</a></h4>
+<p>To add components to an entity, you must first register the component type in the registry. This step ensures that the registry is aware of the component and can manage its instances correctly.</p>
+<p>Once the component is registered, you can add it to any entity. Components are linked to entities via their unique identifiers, and this process is both flexible and efficient.</p>
+<pre><code class="language-c++">#include "Registry.hpp"
+
+struct Velocity {
+  float x, y;
+  Velocity(float x = 0, float y = 0) : x(x), y(y) {}
+};
+
+struct Position {
+  float x, y;
+  float old_x, old_y;
+  Position(int x = 0, int y = 0) : x(x), y(y) {}
+};
+
+int main() {
+    Registry registry;
+    
+    registry.register_component&lt;Position&gt;();
+    registry.register_component&lt;Velocity&gt;();
+    size_t entity = registry.create_entity();
+
+    registry.add_component&lt;Position&gt;(entity, {100, 200});
+
+    registry.add_component&lt;Velocity&gt;(entity, {2, 3});
+
+    std::cout &lt;&lt; "Entity " &lt;&lt; entity &lt;&lt; " has components: Position and Velocity." &lt;&lt; std::endl;
+
+    return 0;
+}
+
+</code></pre>
+<h4 id="3--components-access-and-modification"><a class="header" href="#3--components-access-and-modification">3 : Components Access and Modification</a></h4>
+<p>After a component is associated with an entity, you can access and modify it directly. This is useful for updating entity states, such as changing positions, modifying velocities, or updating health values during gameplay.</p>
+<p>Components can be accessed by their type and the entity ID, ensuring fast lookups and streamlined operations.</p>
+<pre><code class="language-c++">#include "Registry.hpp"
+
+struct Position {
+  float x, y;
+  float old_x, old_y;
+  Position(int x = 0, int y = 0) : x(x), y(y) {}
+};
+
+int main() {
+    Registry registry;
+    
+    registry.register_component&lt;Position&gt;();
+    
+    size_t entity = registry.create_entity();
+
+    registry.add_component&lt;Position&gt;(entity, {100, 200});
+
+    std::cout &lt;&lt; "Initial Pos: (" &lt;&lt; position.x &lt;&lt; ", " &lt;&lt; position.y &lt;&lt; ")" &lt;&lt; std::endl;
+
+    position.x += 10;
+    position.y += 20;
+
+    std::cout &lt;&lt; "Updated Pos : (" &lt;&lt; position.x &lt;&lt; ", " &lt;&lt; position.y &lt;&lt; ")" &lt;&lt; std::endl;
+
+    return 0;
+}
+
+</code></pre>
+<h4 id="4--systems-and-entity-updates"><a class="header" href="#4--systems-and-entity-updates">4 : Systems and Entity Updates</a></h4>
+<p>Systems are where the game logic resides. They iterate over entities with specific components and apply the necessary updates. For example, a movement system might update the position of all entities that have both Position and Velocity components.</p>
+<p>Systems operate independently of the registry, allowing you to define and execute game behavior in a modular way.</p>
+<pre><code class="language-c++">#include "Registry.hpp"
+
+struct Velocity {
+  float x, y;
+  Velocity(float x = 0, float y = 0) : x(x), y(y) {}
+};
+
+struct Position {
+  float x, y;
+  float old_x, old_y;
+  Position(int x = 0, int y = 0) : x(x), y(y) {}
+};
+
+void update_positions(Registry &amp;registry) {
+    auto &amp;positions = registry.get_components&lt;Position&gt;();
+    auto &amp;velocities = registry.get_components&lt;Velocity&gt;();
+
+    for (size_t i = 0; i &lt; positions.size(); ++i) {
+        if (positions[i].has_value() &amp;&amp; velocities[i].has_value()) {
+            positions[i]-&gt;x += velocities[i]-&gt;x;
+            positions[i]-&gt;y += velocities[i]-&gt;y;
+        }
+    }
+}
+
+int main() {
+    Registry registry;
+
+    registry.register_component&lt;Position&gt;();
+
+    size_t entity1 = registry.create_entity();
+    registry.add_component&lt;Position&gt;(entity1, {0, 0});
+    registry.add_component&lt;Velocity&gt;(entity1, {1, 1});
+
+    size_t entity2 = registry.create_entity();
+    registry.add_component&lt;Position&gt;(entity2, {10, 20});
+    registry.add_component&lt;Velocity&gt;(entity2, {2, 3});
+
+    update_positions(registry);
+
+    auto &amp;positions = registry.get_components&lt;Position&gt;();
+    for (size_t i = 0; i &lt; positions.size(); ++i) {
+        if (positions[i].has_value()) {
+            std::cout &lt;&lt; "Entity " &lt;&lt; i &lt;&lt; " Position: (" &lt;&lt; positions[i]-&gt;x &lt;&lt; ", " &lt;&lt; positions[i]-&gt;y &lt;&lt; ")" &lt;&lt; std::endl;
+        }
+    }
+
+    return 0;
+}
+
+</code></pre>
+<h4 id="5--entity-and-component-deletion"><a class="header" href="#5--entity-and-component-deletion">5 : Entity and Component Deletion</a></h4>
+<p>Entities and their components can be removed when they are no longer needed. Deleting an entity will automatically clean up all its associated components. You can also delete specific components from an entity if required.</p>
+<p>This ensures efficient memory usage and keeps the ECS clean and performant during runtime.</p>
+<pre><code class="language-c++">#include "Registry.hpp"
+
+struct Position {
+  float x, y;
+  float old_x, old_y;
+  Position(int x = 0, int y = 0) : x(x), y(y) {}
+};
+
+int main() {
+    Registry registry;
+
+    registry.register_component&lt;Position&gt;();
+
+    size_t entity = registry.create_entity();
+
+    registry.add_component&lt;Position&gt;(entity, {50, 100});
+
+    registry.kill_entity(entity);
+    
+    registry.remove_component&lt;Position&gt;(entity);
+    
+    std::cout &lt;&lt; "Entity and its components have been removed." &lt;&lt; std::endl;
+
+    return 0;
+}
+
+</code></pre>
+<h4 id="6--example-workflow"><a class="header" href="#6--example-workflow">6 : Example Workflow</a></h4>
+<p>Here’s an overview of a typical workflow:</p>
+<pre><code>Register the necessary component types.
+Create entities using the registry.
+Add components to the entities.
+Use systems to define and execute the game logic.
+Access or modify components as needed during gameplay.
+Delete unused entities or components to maintain performance.</code></pre>
 <div style="break-before: page; page-break-before: always;"></div>
                     </main>
 
