@@ -152,7 +152,57 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <h1 id="r-type-architecture"><a class="header" href="#r-type-architecture">R-Type Architecture</a></h1>
+<p>The architecture of R-Type is built around several key components that manage threads, scenes, communication, and graphical rendering.</p>
+<hr />
+<h2 id="1-core-file-and-thread-management"><a class="header" href="#1-core-file-and-thread-management">1. <strong>Core File and Thread Management</strong></a></h2>
+<p>The architecture is centered around a core file, typically named <code>Server.cpp</code> or <code>Game.cpp</code>, which runs three threads:</p>
+<ul>
+<li><strong>TCP Thread</strong>: Manages network connections via TCP.</li>
+<li><strong>UDP Thread</strong>: Manages network connections via UDP.</li>
+<li><strong>Game Loop Thread</strong>: Handles the game logic continuously.</li>
+</ul>
+<hr />
+<h2 id="2-clientserver-interfaces"><a class="header" href="#2-clientserver-interfaces">2. <strong>Client/Server Interfaces</strong></a></h2>
+<p>For both the client and the server, we use the <code>IClient</code> and <code>IServer</code> interfaces. These interfaces are implemented in the following files:</p>
+<ul>
+<li><code>TCP.cpp</code></li>
+<li><code>UDP.cpp</code></li>
+</ul>
+<p>These implementations manage network communications via TCP and UDP.
+<img src="https://iili.io/2PiL4V4.png" alt="Client/Server Architecture Illustration" width="450"/></p>
+<hr />
+<h2 id="3-scene-system"><a class="header" href="#3-scene-system">3. <strong>Scene System</strong></a></h2>
+<p>The architecture also features a basic scene system. The scene structure is organized as follows:</p>
+<ol>
+<li><strong><code>IScene</code> Interface</strong></li>
+<li><strong>Abstract Class <code>AScene</code></strong></li>
+<li><strong>Concrete Implementations</strong>:
+<ul>
+<li>Endless</li>
+<li>History</li>
+<li>OneVsOne</li>
+<li>Menu</li>
+<li>Lobby</li>
+</ul>
+</li>
+</ol>
+<p>The core file contains an instance of each scene, and an enum specifies which scene should be played. Each scene is mapped to an enum value in a <code>std::map</code>. Each scene implements an overridden <code>loop</code> method that returns a <code>sceneType</code> enum to determine if the scene should change.</p>
+<img src="https://iili.io/2PipPIt.png" alt="Client/Server Architecture Illustration" width="600"/>
+<hr />
+<h2 id="4-graphical-core-sdl3"><a class="header" href="#4-graphical-core-sdl3">4. <strong>Graphical Core (SDL3)</strong></a></h2>
+<p>The graphical core of the project contains an instance of the <code>Window</code> class, which interacts with the SDL3 graphics library through various methods.</p>
+<hr />
+<h2 id="5-ecs-entity-component-system"><a class="header" href="#5-ecs-entity-component-system">5. <strong>ECS (Entity-Component-System)</strong></a></h2>
+<p>The architecture also includes an instance of the ECS system, specifically the <code>Registry</code>, which efficiently manages most of the game entities.</p>
+<hr />
+<h2 id="6-thread-communication-via-queue"><a class="header" href="#6-thread-communication-via-queue">6. <strong>Thread Communication via Queue</strong></a></h2>
+<p>The code includes an instance of <code>Queue</code> (in <code>Queue.hpp</code>), allowing communication between the three threads. This enables the game loop thread to send messages to the server through the TCP or UDP queues, facilitating bidirectional communication between all threads.</p>
+<img src="https://iili.io/2PsJYaj.png" alt="Client/Server Architecture Illustration" width="300"/>
+<hr />
+<h2 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h2>
+<p>The architecture of R-Type is based on a modular and optimized system for managing network connections, game scenes, graphical rendering, and entities. Each component is designed to work seamlessly and efficiently, providing an optimal gaming experience.</p>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
