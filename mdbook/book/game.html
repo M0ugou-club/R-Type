@@ -246,6 +246,32 @@ Prioritize eliminating high-damage or fast enemies.
 Adapt to different enemy behaviors and attack patterns.
 Survive waves while collecting points and progressing through the game.
 </code></pre>
+<h4 id="example-json-configuration"><a class="header" href="#example-json-configuration">Example JSON Configuration</a></h4>
+<p>Below is an example JSON file for a single level in <strong>Adventure Mode</strong>:</p>
+<pre><code class="language-json">{
+  "enemies": [
+    {
+      "type": "Boss",
+      "number": 2,
+      "ia": "Boss",
+      "frequency": "High"
+    }
+  ],
+  "dialogues": "../src/game/config/history/sounds/audio3.mp3",
+  "character": "../src/game/config/history/caracter/Hero.png",
+  "talkingCharacter": "../src/game/config/history/caracter/HeroTalking.png"
+}
+</code></pre>
+<p>dialogues (Optional): Path to the audio file (e.g., .mp3, .wav) that will be played at the start of the level.</p>
+<p>character (Optional): Path to the image representing the speaker (static sprite).</p>
+<p>talkingCharacter (Optional): Path to the image representing the speaker talking (e.g., mouth open).</p>
+<h4 id="how-the-dialogue-and-animation-work"><a class="header" href="#how-the-dialogue-and-animation-work">How the Dialogue and Animation Work</a></h4>
+<p>Level Start: The game checks if dialogues is present in the level’s JSON. If it exists, the audio file is loaded and played.</p>
+<p>Sprite Animation:
+If both character and talkingCharacter are defined, the game alternates between them in a short, repeating cycle to simulate talking.
+This continues until the audio track specified by dialogues finishes playing.
+End of Dialogue: Once the audio has ended, both sprites are removed from the screen.
+Wave Gameplay: The normal wave gameplay then proceeds, spawning the enemies defined in the enemies array.</p>
 <h3 id="duel-mode"><a class="header" href="#duel-mode">Duel Mode</a></h3>
 <p>In Duel Mode, you can engage in a 1v1 battle with your friend. Each player has the ability to use a special ability or spell every 10 seconds. The goal is simple: defeat your opponent by strategically using your abilities and attacks. The player who successfully destroys the other first wins the match. This mode focuses on fast-paced, strategic gameplay where timing and skillful use of your special abilities are key to victory.</p>
 
