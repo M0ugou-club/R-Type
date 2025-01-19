@@ -7,5 +7,7 @@ var searchData=
   ['entities_4',['entities',['../classEntities.html',1,'Entities'],['../classEntities.html#a9cf80965ea0ba47de81285a582f20b74',1,'Entities::Entities()']]],
   ['entities_2ehpp_5',['Entities.hpp',['../Entities_8hpp.html',1,'']]],
   ['entity_5ffrom_5findex_6',['entity_from_index',['../classRegistry.html#ac7886237a4856f5bd74110cdd7acdef9',1,'Registry']]],
-  ['erase_7',['erase',['../classSparseArray.html#ab00e54b0c21ac9380db0f5c493138da0',1,'SparseArray']]]
+  ['erase_7',['erase',['../classSparseArray.html#ab00e54b0c21ac9380db0f5c493138da0',1,'SparseArray']]],
+  ['executecommandhandle_8',['executeCommandHandle',['../classCommandHandle.html#a250663f50c2a82daaa414fd103e54f02',1,'CommandHandle']]],
+  ['executecommandsend_9',['executeCommandSend',['../classCommandSend.html#a3895919e6319988c28f044378ed5be33',1,'CommandSend']]]
 ];
