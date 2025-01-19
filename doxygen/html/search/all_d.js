@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['server_0',['Server',['../classServer.html',1,'']]],
-  ['size_1',['size',['../classSparseArray.html#a3b485311dcd6c7e4f3bffee764297b42',1,'SparseArray']]],
-  ['size_5ftype_2',['size_type',['../classSparseArray.html#a9d5ca75440edd7313f21e84255404a0b',1,'SparseArray']]],
-  ['sound_3',['Sound',['../classSound.html',1,'']]],
-  ['sparsearray_4',['sparsearray',['../classSparseArray.html',1,'SparseArray&lt; Component &gt;'],['../classSparseArray.html#a98795bd6dead1b0dbe65892f67164135',1,'SparseArray::SparseArray()=default'],['../classSparseArray.html#a006175c7b6c84308e380ced28933c817',1,'SparseArray::SparseArray(SparseArray const &amp;other)'],['../classSparseArray.html#ab64bce1e1c570e57f57b80ce591b37a8',1,'SparseArray::SparseArray(SparseArray &amp;&amp;other) noexcept']]],
-  ['sparsearray_2ehpp_5',['SparseArray.hpp',['../SparseArray_8hpp.html',1,'']]],
-  ['spawn_5fentity_6',['spawn_entity',['../classRegistry.html#ad81bdeebc99ce487b6a2b667d4e49674',1,'Registry::spawn_entity()'],['../classRegistry.html#a44def5f9557c29af1c44e82d3f9c8e19',1,'Registry::spawn_entity(std::size_t id)']]]
+  ['onevsone_0',['OneVsOne',['../classOneVsOne.html',1,'']]],
+  ['operator_20std_3a_3asize_5ft_1',['size_t',['../classEntities.html#afec75be00f8595249d752c6739c92d6a',1,'Entities']]],
+  ['operator_3d_2',['operator=',['../classSparseArray.html#aea8cd7086c30b74d8a54ef1cde26a2fb',1,'SparseArray::operator=(SparseArray const &amp;other)'],['../classSparseArray.html#aadc59d0625bd2f477bdc16823f63bc66',1,'SparseArray::operator=(SparseArray &amp;&amp;other) noexcept']]],
+  ['operator_5b_5d_3',['operator[]',['../classSparseArray.html#a2f14bd4ee972b659901ff393141daad4',1,'SparseArray::operator[](std::size_t index)'],['../classSparseArray.html#a58a9c737eadf46a94d366ed09321ce3f',1,'SparseArray::operator[](std::size_t index) const']]]
 ];

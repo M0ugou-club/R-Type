@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['game_0',['Game',['../classGame.html',1,'']]],
-  ['get_5fa_5fcomponent_1',['get_a_component',['../classRegistry.html#a9a14f992b0caec915367c6a41755b758',1,'Registry']]],
-  ['get_5favailable_5fentities_2',['get_available_entities',['../classRegistry.html#a67f78ad84cf42702c76618bca245255b',1,'Registry']]],
-  ['get_5fcomponents_3',['get_components',['../classRegistry.html#ab8ff3522b765d882b46262ad345db07b',1,'Registry::get_components()'],['../classRegistry.html#a938c4c35e4ed88d22351735c9ac2f114',1,'Registry::get_components() const']]],
-  ['get_5findex_4',['get_index',['../classSparseArray.html#a15ea7c30a1b97f67036b9b1ffcecb715',1,'SparseArray']]]
+  ['emplace_5fat_0',['emplace_at',['../classSparseArray.html#aaa1ff99242bf6573c152b4a54b158947',1,'SparseArray']]],
+  ['emplace_5fcomponent_1',['emplace_component',['../classRegistry.html#abe2f7a0beeae4746861078357d706fb1',1,'Registry']]],
+  ['end_2',['end',['../classSparseArray.html#a4d32f10955bedd6229eba1da50e79bea',1,'SparseArray::end()'],['../classSparseArray.html#a9b75ec5365af5f139019f5acdc80854e',1,'SparseArray::end() const']]],
+  ['endless_3',['EndLess',['../classEndLess.html',1,'']]],
+  ['entities_4',['entities',['../classEntities.html',1,'Entities'],['../classEntities.html#a9cf80965ea0ba47de81285a582f20b74',1,'Entities::Entities()']]],
+  ['entities_2ehpp_5',['Entities.hpp',['../Entities_8hpp.html',1,'']]],
+  ['entity_5ffrom_5findex_6',['entity_from_index',['../classRegistry.html#ac7886237a4856f5bd74110cdd7acdef9',1,'Registry']]],
+  ['erase_7',['erase',['../classSparseArray.html#ab00e54b0c21ac9380db0f5c493138da0',1,'SparseArray']]]
 ];

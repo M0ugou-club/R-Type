@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['onevsone_0',['OneVsOne',['../classOneVsOne.html',1,'']]],
-  ['operator_20std_3a_3asize_5ft_1',['size_t',['../classEntities.html#afec75be00f8595249d752c6739c92d6a',1,'Entities']]],
-  ['operator_3d_2',['operator=',['../classSparseArray.html#aea8cd7086c30b74d8a54ef1cde26a2fb',1,'SparseArray::operator=(SparseArray const &amp;other)'],['../classSparseArray.html#aadc59d0625bd2f477bdc16823f63bc66',1,'SparseArray::operator=(SparseArray &amp;&amp;other) noexcept']]],
-  ['operator_5b_5d_3',['operator[]',['../classSparseArray.html#a2f14bd4ee972b659901ff393141daad4',1,'SparseArray::operator[](std::size_t index)'],['../classSparseArray.html#a58a9c737eadf46a94d366ed09321ce3f',1,'SparseArray::operator[](std::size_t index) const']]]
+  ['listen_0',['listen',['../classServer.html#a1b6d4d3d5354395c6a818f7c5b52246a',1,'Server']]],
+  ['load_5fcomponent_1',['load_component',['../classServer.html#a4ae249752190245f63fd17585b8148f8',1,'Server']]],
+  ['lobby_2',['Lobby',['../classLobby.html',1,'']]],
+  ['lobbyhistory_3',['LobbyHistory',['../classLobbyHistory.html',1,'']]],
+  ['loop_4',['loop',['../classEndLess.html#ae227a86b640458e6606b36f2d8d47261',1,'EndLess::loop()'],['../classHistory.html#a7ca95e18dc66fa75d182e3c11dfd26da',1,'History::loop()'],['../classIScene.html#aab68715b4a732e9bc6c0f911abdcca1f',1,'IScene::loop()'],['../classLobby.html#aca04b095c727b324e6462a48d3061bb2',1,'Lobby::loop()'],['../classLobbyHistory.html#ade72063a6f4f6e9a0a1481e314f9ab18',1,'LobbyHistory::loop()'],['../classOneVsOne.html#a1e90627ea52d1cdef6c74776aa1eb685',1,'OneVsOne::loop()']]]
 ];

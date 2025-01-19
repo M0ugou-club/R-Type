@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['wave_0',['Wave',['../classWave.html',1,'']]],
-  ['window_1',['Window',['../classWindow.html',1,'']]]
+  ['text_0',['Text',['../classText.html',1,'']]],
+  ['textinput_1',['TextInput',['../classTextInput.html',1,'']]],
+  ['texttyping_2',['TextTyping',['../structTextTyping.html',1,'']]]
 ];

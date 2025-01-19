@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['begin_0',['begin',['../classSparseArray.html#a1ed9d2b182b52ed5cd6b544107ef8af4',1,'SparseArray::begin()'],['../classSparseArray.html#a7fa6228501432328b3b7e5f3142829c7',1,'SparseArray::begin() const']]],
-  ['button_1',['Button',['../classButton.html',1,'']]]
+  ['add_5fcomponent_0',['add_component',['../classRegistry.html#a876f497e5d5948f43c95207a12ca981f',1,'Registry']]],
+  ['ascene_1',['ascene',['../classAScene.html',1,'AScene'],['../classAScene.html#ad0eacf691dbc8240fdf3a42d450c1042',1,'AScene::AScene()']]],
+  ['ascene_2ehpp_2',['AScene.hpp',['../server_2scenes_2AScene_8hpp.html',1,'']]]
 ];

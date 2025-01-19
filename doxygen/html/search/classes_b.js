@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['registry_0',['Registry',['../classRegistry.html',1,'']]]
+  ['onevsone_0',['OneVsOne',['../classOneVsOne.html',1,'']]]
 ];

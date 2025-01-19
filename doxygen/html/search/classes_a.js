@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['onevsone_0',['OneVsOne',['../classOneVsOne.html',1,'']]]
+  ['menu_0',['Menu',['../classMenu.html',1,'']]]
 ];
