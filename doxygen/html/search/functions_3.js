@@ -6,6 +6,7 @@ var searchData=
   ['entities_3',['Entities',['../classEntities.html#a9cf80965ea0ba47de81285a582f20b74',1,'Entities']]],
   ['entity_5ffrom_5findex_4',['entity_from_index',['../classRegistry.html#ac7886237a4856f5bd74110cdd7acdef9',1,'Registry']]],
   ['erase_5',['erase',['../classSparseArray.html#ab00e54b0c21ac9380db0f5c493138da0',1,'SparseArray']]],
-  ['executecommandhandle_6',['executeCommandHandle',['../classCommandHandle.html#a250663f50c2a82daaa414fd103e54f02',1,'CommandHandle']]],
-  ['executecommandsend_7',['executeCommandSend',['../classCommandSend.html#a3895919e6319988c28f044378ed5be33',1,'CommandSend']]]
+  ['executecommandgame_6',['executeCommandGame',['../classCommandGame.html#a4fb9b3583cdff799b80b497d698e1f1e',1,'CommandGame']]],
+  ['executecommandhandle_7',['executecommandhandle',['../classCommandHandle.html#a250663f50c2a82daaa414fd103e54f02',1,'CommandHandle::executeCommandHandle(uint8_t commandType, std::vector&lt; uint8_t &gt; buffer, IClient *protocol, Queue *queue)'],['../classCommandHandle.html#a4e7ab76311de13538fed6ad3c3737867',1,'CommandHandle::executeCommandHandle(uint8_t commandType, std::vector&lt; uint8_t &gt; buffer, IProtocol *protocol, Queue *queue)']]],
+  ['executecommandsend_8',['executecommandsend',['../classCommandSend.html#a3895919e6319988c28f044378ed5be33',1,'CommandSend::executeCommandSend(Command command, IClient *protocol)'],['../classCommandSend.html#ae0dec43fa8d5abc9be45f2e49ef92c71',1,'CommandSend::executeCommandSend(Command command, IProtocol *protocol)']]]
 ];
